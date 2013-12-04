@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+    
+     <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="65"
+        android:fillViewport="true" >
+    
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+    
+
+    <EditText
+        android:id="@+id/accSet_inputUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="show current"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_toRightOf="@+id/textView1"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"       
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="12dp"
+        android:text="User Name:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+     <LinearLayout
+        android:id="@+id/accSet_UserInfoLinearLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="3dp"
+        android:layout_below="@+id/textView1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="2dp"
+            android:text="First Name" />
+
+        <EditText
+            android:id="@+id/accSet_Fname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_marginLeft="2dp"
+            android:text="Last Name" />
+
+        <EditText
+            android:id="@+id/accSet_Lname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_marginLeft="2dp"
+            android:text="Password" />
+
+        <EditText
+            android:id="@+id/accSet_Passsword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />       
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="3dp"
+            android:text="Email Address" />
+
+        <EditText
+            android:id="@+id/AccSet_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+    </LinearLayout>
+    
+     <Button
+            android:id="@+id/spliterAddress"
+            android:layout_below="@+id/textShippingAD"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="fill_parent"
+            android:layout_height="4dp"            
+            android:background="@drawable/customb2"
+            android:clickable="false" />
+
+
+        <Button
+            android:id="@+id/Cardsplitter"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="fill_parent"
+            android:layout_height="4dp"
+            android:layout_below="@+id/textView2"
+            android:background="@drawable/customb2"
+            android:clickable="false" />
+  
+
+    <Spinner
+        android:id="@+id/accSet_CardsSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/Cardsplitter" />
+
+    <Button
+        android:id="@+id/accSet_RemoveB"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/accSet_removeSAButton"
+        android:layout_below="@+id/accSet_CardsSpinner"
+        android:layout_toRightOf="@+id/accSet_AddSAButton"
+        android:text="Remove" />
+
+    <Button
+        android:id="@+id/accSet_AddB"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/accSet_CardsSpinner"
+        android:layout_toLeftOf="@+id/accSet_RemoveB"
+        android:text="Add" />    
+  
+        <Button
+            android:id="@+id/paypalSpliterB"
+            android:layout_below="@+id/accSet_paypalText"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="fill_parent"
+            android:layout_height="4dp"            
+            android:background="@drawable/customb2"
+            android:clickable="false" />
+    
+    <Button
+        android:id="@+id/accSet_SaveB"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/SpliterB"
+        android:text="Save" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/accSet_ShippingAddressBox"
+        android:layout_below="@+id/accSet_AddSAButton"
+        android:text="Credit Card:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/accSet_removeSAButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView2"
+        android:layout_toRightOf="@+id/accSet_AddSAButton"
+        android:text="Remove" />
+
+    <TextView
+        android:id="@+id/accSet_ShippingAddressBox"
+        android:layout_width="360dp"
+        android:layout_height="140dp"
+        android:layout_below="@+id/accSet_AddressSpinner"
+        android:layout_centerHorizontal="true"
+        android:inputType="textMultiLine"
+        android:text="shipping address: ...Current default shipping address"
+        android:textSize="17sp" />
+
+    <Spinner
+        android:id="@+id/accSet_AddressSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/spliterAddress" />
+
+    <TextView
+        android:id="@+id/textShippingAD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_alignLeft="@+id/accSet_ShippingAddressBox"
+        android:layout_below="@+id/accSet_UserInfoLinearLay"
+        android:text="Shipping Address:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />     
+
+    <Button
+        android:id="@+id/accSet_AddSAButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/accSet_ShippingAddressBox"
+        android:layout_toRightOf="@+id/textView2"
+        android:text="Add" />
+
+    <TextView
+        android:id="@+id/accSet_paypalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/accSet_AddB"
+        android:text="Email from Paypal account:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/accSet_paypalLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/paypalSpliterB"
+        android:layout_alignLeft="@+id/textView1"
+        android:src="@drawable/pp_logo" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/accSet_paypalLogo"
+        android:layout_toRightOf="@+id/accSet_paypalLogo"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+    
+     <Button
+            android:id="@+id/SpliterB"
+            android:layout_below="@+id/accSet_paypalLogo"
+            android:layout_marginTop="5dp"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="fill_parent"
+            android:layout_height="4dp"            
+            android:background="@drawable/customb2"
+            android:clickable="false" />
+    
+    </RelativeLayout> 
+   </ScrollView> 
+</LinearLayout>

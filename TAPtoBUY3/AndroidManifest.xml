@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.gui.taptobuy.phase1"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="9"
+        android:targetSdkVersion="17" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission  android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <meta-data android:name="android.app.default_searchable"
+                   android:value=".SearchableActivity" />
+        
+        <activity
+            android:name="com.gui.taptobuy.activity.SignInActivity"
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>        
+       
+        
+		<activity
+            android:name="com.gui.taptobuy.activity.CartActivity"
+            android:label="@string/cartLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.CART" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>       
+        
+         <activity
+            android:name="com.gui.taptobuy.activity.RegisterActivity"
+            android:label="@string/registerLabel" 
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.USERREGISTER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+         
+          <activity
+            android:name="com.gui.taptobuy.activity.CategoryActivity"
+            android:label="@string/categoriesLabel" 
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.CATEGORYACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>        
+         
+         <activity
+            android:name="com.gui.taptobuy.activity.SearchActivity"
+            android:label="@string/searchLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.SEARCHACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.gui.taptobuy.activity.BidProductInfoActivity"
+            android:label="@string/bidInfoLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.BIDPRODUCTROWACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+           <activity
+            android:name="com.gui.taptobuy.activity.BuyItProductInfoActivity"
+            android:label="@string/buyInfoLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.BUYITPRODUCTACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+          <activity
+            android:name="com.gui.taptobuy.activity.MyTapActivity"
+            android:label="@string/myTapLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.MYTAPACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+          <activity
+            android:name="com.gui.taptobuy.activity.SellAnItemActivity"
+            android:label="@string/sellanItemLabel"           
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.SELLANITEMACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.gui.taptobuy.activity.MyHistoryActivity"
+            android:label="@string/myHistoryLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.MYHISTORYACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+         <activity
+            android:name="com.gui.taptobuy.activity.MySellingActivity"
+            android:label="@string/mySellingLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.MYSELLINGACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.gui.taptobuy.activity.MyBiddingActivity"
+            android:label="@string/myBiddingLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.MYBIDDINGACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.gui.taptobuy.activity.OrderCheckoutActivity"
+            android:label="@string/orderCheckoutLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.ORDERCHECKOUTACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.gui.taptobuy.activity.AccountSettingsActivity"
+            android:label="@string/accountSettingsLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.ACCOUNTSETTINGSACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.gui.taptobuy.activity.ReportItemsActivity"
+            android:label="@string/reportsLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.REPORTITEMSACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+    	 <activity
+            android:name="com.gui.taptobuy.activity.BidsActivity"
+            android:label="@string/bidsLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.BIDSACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>         
+
+
+    
+      <activity
+            android:name="com.gui.taptobuy.activity.AdministratorActivity"
+            android:label="@string/administratorLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.ADMINISTRATORACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+           <activity
+            android:name="com.gui.taptobuy.activity.PurchasedOrderReceiptActivity"
+            android:label="@string/receiptLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.PURCHASEDORDERRECEIPTACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>    
+    
+      <activity
+            android:name="com.gui.taptobuy.activity.SoldOrderReceiptActivity"
+            android:label="@string/receiptLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.SOLDDORDERRECEIPTACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
+      
+    </application>
+</manifest>

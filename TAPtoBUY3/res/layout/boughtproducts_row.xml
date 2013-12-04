@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/boughtProductPic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="4dip"
+        android:layout_marginTop="4dip"
+        android:src="@drawable/android" />
+
+    <TextView
+        android:id="@+id/boughtProdName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/boughtSellerID"
+        android:layout_alignTop="@+id/boughtProductPic"
+        android:text="Product Name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/boughtSellerID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/boughtPrice"
+        android:layout_marginLeft="3dp"
+        android:layout_toRightOf="@+id/boughtProductPic"
+        android:text="sellerUsername"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <RatingBar
+        android:id="@+id/boughtSellerRating"
+        style="@style/productRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/boughtSellerID"
+        android:layout_below="@+id/boughtSellerID"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:rating="4.5" />
+
+    <TextView
+        android:id="@+id/boughtPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/boughtProdName"
+        android:layout_below="@+id/boughtProdName"
+        android:text="Paid price"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/boughtSellerID"
+        android:layout_toRightOf="@+id/boughtProdName"
+        android:text="QTY or BidsAmount"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>

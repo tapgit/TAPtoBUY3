@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">TAPtoBUY</string>
+    <string name="cartLabel">My Cart</string>
+    <string name="searchLabel">What are you looking for ?</string>
+    <string name="registerLabel">User Registration</string>
+    <string name="categoriesLabel">Categories</string>
+    <string name="bidInfoLabel">Product Details</string>
+    <string name="myTapLabel">My Tap</string>
+    <string name="buyInfoLabel">Product Details</string>
+    <string name="sellanItemLabel">Sell an Item!</string>
+    <string name="myHistoryLabel">My History</string>
+    <string name="mySellingLabel">My Sellings</string>
+    <string name="myBiddingLabel">My Biddings</string>
+    <string name="orderCheckoutLabel">Checkout</string>
+    <string name="bidsLabel">Items bids list</string>
+     <string name="administratorLabel">Administrator Settings</string>
+     <string name="receiptLabel"> Order receipt </string>
+    <string name="reportsLabel">Administrator report</string>
+    <string name="accountSettingsLabel">Account Settings</string>
+    <string name="menu_settings">Settings</string>
+   
+    <string name="Sort">Sort by</string>   
+    
+    <string-array name = "sortBy">
+        <item >name</item>
+        <item >price</item>
+        <item >brand</item>      
+    </string-array>    
+
+</resources>

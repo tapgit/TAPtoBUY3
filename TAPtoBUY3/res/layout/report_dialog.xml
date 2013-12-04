@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Report"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="7dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+     <Button            
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="fill_parent"
+            android:layout_height="4dp"           
+            
+            android:background="@drawable/customb2"
+            android:clickable="false" />
+
+     <TextView
+         android:id="@+id/textView2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="3dp"
+         android:text="Report Info...."
+         android:layout_marginLeft="10dp"
+         android:inputType="textMultiLine"
+         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/admin_reportDialogOKB"
+        android:layout_width="130dp"
+        android:layout_height="52dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"        
+        android:text="OK" />
+    
+    
+
+</LinearLayout>

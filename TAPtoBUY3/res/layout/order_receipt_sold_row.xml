@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <ImageView
+        android:id="@+id/receipt_soldProductPic"
+        android:layout_width="90dp"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="4dp"
+        android:layout_marginLeft="4dip"
+        android:layout_marginTop="4dip"
+        android:src="@drawable/android" />
+
+    <TextView
+        android:id="@+id/receipt_soldProdName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/receipt_soldProductPic"
+        android:layout_toRightOf="@+id/receipt_soldProductPic"
+        android:text="Product Name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/receipt_soldPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/receipt_soldProdName"
+        android:layout_below="@+id/receipt_soldProdName"
+        android:text="Price + ship"
+       />
+
+    <TextView
+        android:id="@+id/receipt_soldBuyersName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/receipt_soldPrice"
+        android:layout_below="@+id/receipt_soldPrice"
+        android:text="Buyers name" />
+    
+
+</RelativeLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/textBoughtItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Bought Items:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textSoldItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="200dp"
+        android:text="Sold Items:"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/boughtItemsSplitter"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="400dp"
+        android:layout_height="4dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textBoughtItems"
+        android:layout_weight="21.07"
+        android:background="@drawable/customb2"
+        android:clickable="false" />
+
+    <Button
+        android:id="@+id/soldItemsSplitter"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="400dp"
+        android:layout_height="4dp"
+        android:layout_alignBottom="@+id/textSoldItems"
+        android:layout_alignParentLeft="true"
+        android:layout_weight="21.07"
+        android:background="@drawable/customb2"
+        android:clickable="false" />
+
+    <ListView
+        android:id="@+id/myHistory_boughtItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textSoldItems"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/boughtItemsSplitter" >
+
+    </ListView>
+
+    <ListView
+        android:id="@+id/myHistory_SoldItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/soldItemsSplitter" >
+
+    </ListView>
+
+</RelativeLayout>

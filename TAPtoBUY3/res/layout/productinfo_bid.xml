@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/description_background"
+    >
+
+     <ImageView
+        android:id="@+id/BidInfoProdPic"
+        android:layout_width="300dp"
+        android:layout_height="180dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/android" />
+
+    <TextView
+        android:id="@+id/BidInfoProdTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/BidInfoProdPic"
+        android:textStyle="bold"
+        android:fontFamily="comic sans"
+        android:text="Product Title"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/BidInfoProdBrand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/BidInfoProdID"
+        android:layout_below="@+id/BidInfoProdID"
+        android:text="Brand"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/BidInfoDimensions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/BidInfoProdBrand"
+        android:layout_below="@+id/BidInfoProdBrand"
+        android:text="Dimensions"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/BidInfoProdID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/BidInfoProdTitle"
+        android:layout_below="@+id/BidInfoProdTitle"
+        android:text="Product ID"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/BidInfoUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/BidInfoDescription"
+        android:layout_below="@+id/BidInfoDescription"
+        android:text="SellerUsername"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/BidsInfoCurrentBid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/BidInfoUserName"
+        android:layout_below="@+id/BidInfoUserName"
+        android:text="Current Bid:"
+        android:textAppearance="?android:attr/textAppearance" />
+
+    <TextView
+        android:id="@+id/BidInfoTimeLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/BidInfoProdBrand"
+        android:layout_alignRight="@+id/BidInfoProdPic"
+        android:text="Time Left:"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/BidInfoPlaceBidInput"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/BidInfoShippingPrice"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="8dp"
+        android:hint="bid here!"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/BidInfoPlaceBidb"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/BidInfoDescription"
+        android:layout_marginRight="36dp"
+        android:layout_marginBottom="8dp"
+        android:text="Place Bid!" />
+
+    <TextView
+        android:id="@+id/BidInfoShippingPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/BidsInfoCurrentBid"
+        android:layout_below="@+id/BidsInfoCurrentBid"
+        android:text="Shipping:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <RatingBar
+        android:id="@+id/BidInfoSellerRate"
+        style="@style/productRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        android:layout_alignRight="@+id/BidInfoDescription"
+        android:layout_alignTop="@+id/BidInfoUserName"
+        
+        android:numStars="5" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_alignLeft="@+id/BidInfoDescription"
+        android:layout_below="@+id/BidInfoDimensions"
+        android:textStyle="bold"
+        android:text="Description:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/BidInfoDescription"
+        android:layout_width="140dp"
+        android:layout_height="90dp"
+        android:layout_alignLeft="@+id/BidInfoDimensions"
+        android:layout_alignRight="@+id/BidInfoTimeLeft"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="3dp"        
+        android:inputType="textMultiLine"
+        android:text="Description:"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/BidInfoDollarSy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/BidInfoPlaceBidInput"
+        android:layout_alignBottom="@+id/BidInfoPlaceBidInput"
+        android:layout_alignLeft="@+id/BidInfoProdPic"
+        android:text="$"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>
+
+

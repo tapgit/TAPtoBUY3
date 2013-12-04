@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/mySell_BidProductPic"
+        android:layout_width="110dp"
+        android:layout_height="90dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="4dip"
+        android:layout_marginTop="4dip"
+        android:src="@drawable/android" />
+
+    <TextView
+        android:id="@+id/mySell_BidPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/mySell_BidProdName"
+        android:layout_below="@+id/mySell_BidProdName"
+        android:text="Price + ship"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/mySell_BidProdName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_alignTop="@+id/mySell_BidProductPic"
+        android:layout_toRightOf="@+id/mySell_BidProductPic"
+        android:text="Product Name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/mySell_BidRemaningTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/mySell_TimeLefttext"       
+        android:layout_toRightOf="@+id/mySell_TimeLefttext"
+        android:text="2d 13h"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/mySell_bids"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/mySell_QuitB"
+        android:layout_alignRight="@+id/mySell_QuitB"
+        android:text="24 bids"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/mySell_TimeLefttext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/mySell_BidPrice"
+        android:layout_below="@+id/mySell_BidPrice"
+        android:text="Time left: "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Button
+        android:id="@+id/mySell_BidList"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:layout_alignLeft="@+id/mySell_TimeLefttext"
+        android:layout_below="@+id/mySell_TimeLefttext"
+        android:text="Bid List"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/mySell_AcceptBidB"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/mySell_BidList"
+        android:layout_toRightOf="@+id/mySell_BidList"
+        android:text="Accept Bid"
+        android:textSize="13sp" />
+
+    <Button
+        android:id="@+id/mySell_QuitB"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="70dp"
+        android:layout_height="35dp"
+        android:layout_alignBottom="@+id/mySell_AcceptBidB"
+        android:layout_toRightOf="@+id/mySell_AcceptBidB"
+        android:text="Quit" />
+
+</RelativeLayout>

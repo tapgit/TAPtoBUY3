@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="horizontal" >
+    
+<ImageView
+        android:id="@+id/BuyItProductPic"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="4dip"        
+        android:layout_marginTop="4dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/android" />
+
+    <TextView
+        android:id="@+id/BuyItProdName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/BuyItSellerID"
+        android:layout_alignRight="@+id/BuyItNowText"
+        android:layout_alignTop="@+id/BuyItProductPic"
+        android:text="Product Name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/BuyItNowText"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginRight="5dp"        
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/BuyItProdName"
+        android:text="Buy it Now"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/BuyItSellerID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/BuyItPrice"
+        android:layout_marginLeft="3dp"
+        android:layout_toLeftOf="@+id/BuyItRemaningTime"
+        android:layout_toRightOf="@+id/BuyItProductPic"
+        android:text="sellerUsername"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <RatingBar
+        android:id="@+id/BuyItSellerRating"
+        style="@style/productRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/BuyItSellerID"
+        android:layout_below="@+id/BuyItSellerID"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:rating="4.5"/>
+
+    <TextView
+        android:id="@+id/BuyItPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/BuyItProdName"
+        android:layout_below="@+id/BuyItProdName"
+        android:layout_toLeftOf="@+id/BuyItNowText"
+        android:text="Price + Shipp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/BuyItRemaningTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"       
+        android:layout_alignBottom="@+id/BuyItNowText"
+        android:layout_alignRight="@+id/BuyItNowText"
+        android:text="2d 13h"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+</RelativeLayout>

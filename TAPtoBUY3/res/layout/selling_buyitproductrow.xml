@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/mySell_BuyNProductPic"
+        android:layout_width="110dp"
+        android:layout_height="90dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="4dip"
+        android:layout_marginTop="4dip"
+        android:src="@drawable/android" />
+
+    <TextView
+        android:id="@+id/mySell_BuyNPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/mySell_BuyNProdName"
+        android:layout_below="@+id/mySell_BuyNProdName"
+        android:text="Price + ship"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/mySell_BuyNProdName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_alignTop="@+id/mySell_BuyNProductPic"
+        android:layout_toRightOf="@+id/mySell_BuyNProductPic"
+        android:text="Product Name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/mySell_TimeLefttext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/mySell_BuyNPrice"
+        android:layout_below="@+id/mySell_BuyNPrice"
+        android:text="Time left: "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Button
+        android:id="@+id/mySell_QuitfromSellingB"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="160dp"
+        android:layout_height="35dp"
+        android:layout_alignLeft="@+id/mySell_TimeLefttext"
+        android:layout_below="@+id/mySell_TimeLefttext"
+        android:text="Quit from selling"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/mySell_BuyNRemaningTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/mySell_QuitfromSellingB"
+        android:layout_toRightOf="@+id/mySell_TimeLefttext"
+        android:text="2d 13h"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/mSell_Quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/mySell_BuyNProductPic"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="49dp"
+        android:text="Qty:" />
+
+</RelativeLayout>

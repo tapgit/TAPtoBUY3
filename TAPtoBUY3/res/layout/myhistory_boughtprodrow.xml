@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <ImageView
+        android:id="@+id/myHist_BoughtProductPic"
+        android:layout_width="90dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="4dip"
+        android:layout_marginTop="4dip"        
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/android" />
+
+    <TextView
+        android:id="@+id/myHist_BoughtProdName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"       
+        android:layout_alignLeft="@+id/myHist_BoughtSellerID"
+        android:layout_alignTop="@+id/myHist_BoughtProductPic"
+        android:text="Product Name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/myHist_BoughtSellerID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_below="@+id/myHist_BoughtPrice"
+        android:layout_toRightOf="@+id/myHist_BoughtProductPic"
+        android:text="sellerUsername"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <RatingBar
+        android:id="@+id/myHist_BoughtSellerRating"
+        style="@style/productRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/myHist_BoughtPrice"
+        android:layout_marginRight="22dp"
+        android:isIndicator="false"
+        android:numStars="5"
+        />
+
+    <TextView
+        android:id="@+id/myHis_rateSellertext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/myHist_BoughtSellerRating"
+        android:layout_alignLeft="@+id/myHist_BoughtSellerRating"
+        android:text="rate seller:"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/myHist_BoughtPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/myHist_BoughtSellerID"
+        android:layout_below="@+id/myHist_BoughtProdName"
+        android:text="Price + Shipp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/myHist_pruchOrWon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/myHist_BoughtSellerID"
+        android:layout_below="@+id/myHist_BoughtSellerID"
+        android:text="QTY or BidsAmount"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>

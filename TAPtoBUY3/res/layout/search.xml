@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/portraitplain_background" >
+      
+  <Button
+      android:id="@+id/splitter"
+      style="?android:attr/buttonStyleSmall"
+      android:layout_width="400dp"
+      android:layout_height="4dp"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@+id/bSearch"
+      android:layout_marginBottom="5dp"
+      android:layout_marginRight="4dp"
+      android:layout_marginLeft="4dp"
+      android:layout_weight="21.07"
+      android:background="@drawable/customb2"
+      android:clickable="false" />
+
+  <EditText
+      android:id="@+id/searchText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_above="@+id/splitter"
+      android:layout_alignParentLeft="true"
+      android:layout_alignTop="@+id/bSearch"
+      android:layout_toLeftOf="@+id/bSearch"
+      android:ems="10"
+      android:inputType="text"
+      android:hint="Search"
+      android:textSize="20sp"
+      android:textStyle="italic" >
+
+      <requestFocus />
+  </EditText>
+
+  <Button
+      android:id="@+id/bSearch"
+      style="?android:attr/buttonStyleSmall"
+      android:layout_width="45dp"
+      android:layout_height="45dp"     
+      android:layout_alignParentRight="true"
+      android:layout_alignParentTop="true"
+      android:layout_margin="5dp"
+      android:background="@drawable/remote_search" />
+
+  <Button
+      android:id="@+id/bCart"
+      style="?android:attr/buttonStyleSmall"
+      android:layout_width="45dp"
+      android:layout_height="47dp"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@+id/splitter"
+      android:layout_marginLeft="4dp"
+      android:background="@drawable/cart" />
+
+  <Button
+      android:id="@+id/bCategories"
+      style="?android:attr/buttonStyleSmall"
+      android:layout_width="73dp"
+      android:layout_height="50dp"
+      android:layout_alignBottom="@+id/bCart"
+      android:layout_alignTop="@+id/bCart"
+      android:layout_marginLeft="5dp"
+      android:layout_toRightOf="@+id/bCart"
+      android:background="@drawable/cate_icon" />
+
+  <Button
+      android:id="@+id/bMyTap"
+      style="?android:attr/buttonStyleSmall"
+      android:layout_width="wrap_content"
+      android:layout_height="30dp"
+      android:layout_marginTop="3dp"
+      android:layout_marginRight="3dp"
+      android:layout_alignParentRight="true"
+      android:layout_alignTop="@+id/splitter"      
+      android:textSize="10sp"
+      android:textStyle="bold"
+      android:text="My Tap" />
+
+  <Button
+      android:id="@+id/bSignOut"
+      style="?android:attr/buttonStyleSmall"
+      android:layout_width="wrap_content"
+      android:layout_height="30dp"
+      android:layout_alignLeft="@+id/bMyTap"
+      android:layout_alignRight="@+id/splitter"
+      android:layout_below="@+id/bMyTap"
+      android:textSize="8sp"
+      android:textStyle="bold"
+      android:text="Sign out" />
+  
+
+  <Button
+      android:id="@+id/bSignIn"
+      style="?android:attr/buttonStyleSmall"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_alignTop="@+id/bCategories"     
+      android:text="Sign In" />
+
+  <Spinner
+      android:id="@+id/SortSpinner"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignBottom="@+id/reference"
+      android:layout_below="@+id/textSortby"
+      android:layout_toLeftOf="@+id/reference"
+      android:layout_toRightOf="@+id/bCategories" />
+
+  <Button
+      android:id="@+id/splitter2"
+      android:layout_width="400dp"
+      android:layout_height="4dp"
+      android:layout_marginRight="4dp"
+      android:layout_marginLeft="4dp"
+      android:layout_alignParentRight="true"
+      android:layout_below="@+id/reference"
+      android:background="@drawable/customb2"
+      android:clickable="false"
+      />
+
+  <TextView
+      android:id="@+id/textSortby"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"     
+      android:layout_alignBaseline="@+id/splitter"
+      android:layout_alignBottom="@+id/splitter"
+      android:layout_alignLeft="@+id/SortSpinner"
+      android:text="Sort by:"
+      android:textAppearance="?android:attr/textAppearanceSmall" />
+
+  <ListView
+      android:id="@+id/itemsListView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@+id/splitter2" >
+
+  </ListView>
+
+  <Button
+      android:id="@+id/reference"
+      style="?android:attr/buttonStyleSmall"
+      android:layout_width="70dp"
+      android:layout_height="58dp"     
+      android:layout_alignParentRight="true"
+      android:layout_below="@+id/splitter"
+      android:clickable="false"
+      android:text="Im Invisible"
+      android:visibility="invisible" />
+  
+</RelativeLayout>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >    
+
+    <ImageView
+        android:id="@+id/cartProductPic"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentTop="true"        
+        android:src="@drawable/android" />
+
+    <Button
+        android:id="@+id/cartBuyItRemoveB"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignLeft="@+id/cartBuyNowB"
+        android:layout_below="@+id/cartBuyNowB"
+        android:text="Remove"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/cartPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cartProdName"
+        android:layout_toRightOf="@+id/cartProductPic"
+        android:text="Price + ship"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/cartProdName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cartSellerUsername"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/cartSelectedCheck"
+        android:text="Product Name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/cartSellerUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cartPrice"
+        android:layout_below="@+id/cartPrice"
+        android:text="sellerUserName"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <RatingBar
+        android:id="@+id/cartSellerRating"
+        style="@style/productRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/cartBuyItRemoveB"
+        android:layout_alignLeft="@+id/cartSellerUsername"
+        android:isIndicator="false"
+        android:numStars="5"
+        android:rating="3.5" />
+
+    <CheckBox
+        android:id="@+id/cartSelectedCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/cartBuyItRemoveB"
+        android:text="Select" />
+
+    <Button
+        android:id="@+id/cartBuyNowB"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignBottom="@+id/cartSellerUsername"
+        android:layout_alignParentRight="true"
+        android:text="Buy it Now"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="12sp" />
+    
+</RelativeLayout>

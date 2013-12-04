@@ -1,0 +1,150 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/login_background"
+    android:orientation="vertical"
+    tools:ignore="DuplicateIds,HardcodedText,ExtraText" >
+
+    <Button
+        android:id="@+id/button1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="6dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/bSearch"
+        android:layout_margin="5dp"
+        android:background="@drawable/customb2"
+        android:clickable="false" />
+
+    <EditText
+        android:id="@+id/searchAtLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="12dp"
+        android:layout_toLeftOf="@+id/bSearch"
+        android:ems="10"
+        android:hint="Search"
+        android:inputType="text"
+        android:scrollHorizontally="true"
+        android:textSize="28sp"
+        android:textStyle="italic" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/bCart"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_below="@+id/button1"
+        android:layout_margin="5dp"
+        android:background="@drawable/cart" />
+
+    <Button
+        android:id="@+id/bSearch"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="51dp"
+        android:layout_height="52dp"
+        android:layout_alignBottom="@+id/searchAtLogin"
+        android:layout_alignRight="@+id/button1"
+        android:layout_margin="5dp"
+        android:background="@drawable/remote_search" />
+
+    <Button
+        android:id="@+id/bCategories"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="85dp"
+        android:layout_height="45dp"
+        android:layout_alignBaseline="@+id/bCart"
+        android:layout_alignBottom="@+id/bCart"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/bCart"
+        android:background="@drawable/cate_icon" />
+
+    <Button
+        android:id="@+id/Button01"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="6dp"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_below="@+id/bCart"
+        android:layout_margin="5dp"
+        android:background="@drawable/customb2"
+        android:clickable="false" />
+
+        <TextView
+            android:id="@+id/textSign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button1"
+            android:layout_below="@+id/Button01"
+            android:textSize="15sp"
+            android:layout_marginTop="70dp"
+            android:text="Already a member? Sign in!" />
+
+         <Button
+             android:id="@+id/bSign_in"
+             android:layout_width="95dp"
+             android:layout_height="50dp"
+             android:layout_alignBaseline="@+id/textSign_in"
+             android:layout_alignBottom="@+id/textSign_in"
+             android:layout_alignRight="@+id/bSearch"
+             android:text="Sign in" />
+
+         <TextView
+             android:id="@+id/textRegister"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignLeft="@+id/textSign_in"
+             android:layout_alignRight="@+id/textSign_in"
+             android:layout_below="@+id/bSign_in"
+             android:layout_marginTop="70dp"
+             android:text="Not a TAPtoBUY member? Create an account!" />
+
+         <Button
+             android:id="@+id/bRegister"
+             android:layout_width="95dp"
+             android:layout_height="50dp"
+             android:layout_alignBottom="@+id/textRegister"
+             android:layout_alignLeft="@+id/bSign_in"
+             android:text="Register" />
+
+         <Button
+             android:id="@+id/button2"
+             style="?android:attr/buttonStyleSmall"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="250dp"
+             android:visibility="invisible"
+             android:clickable="false"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentTop="true"
+             android:text="Button" />
+
+          <Button
+              android:id="@+id/bSign_Out"
+              android:layout_width="110dp"
+              android:layout_height="55dp"
+              android:layout_alignParentLeft="true"
+              android:layout_marginLeft="135dp"
+              android:layout_marginTop="90dp"
+              android:visibility="gone"
+              android:layout_below="@+id/button2"
+              android:text="Sign out" />
+
+          <ImageView
+              android:id="@+id/signOutPic"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerVertical="true"
+              android:layout_marginTop="20dp"
+              android:layout_marginLeft="40dp"
+              android:visibility="gone"
+              android:layout_toRightOf="@+id/button2"
+              android:src="@drawable/signoutcar" />
+        
+</RelativeLayout>

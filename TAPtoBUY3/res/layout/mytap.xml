@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@drawable/portrait_back">
+
+    <Button
+        android:id="@+id/myTap_AccountSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Account Settings" />
+
+    <Button
+        android:id="@+id/myTap_SignOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/myTap_AccountSet"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/myTap_AccountSet"
+        android:text="Sign Out" />
+
+    <Button
+        android:id="@+id/myTap_MySellings"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/myTap_sellAnItem"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="My Selling Items" />
+
+    <Button
+        android:id="@+id/myTap_MyHistory"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/myTap_BiddingItems"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="My History" />
+
+    <Button
+        android:id="@+id/myTap_sellAnItem"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/myTap_MySellings"
+        android:layout_below="@+id/myTap_SignOut"
+        android:layout_marginTop="40dp"
+        android:text="Sell an Item" />
+
+    <Button
+        android:id="@+id/myTap_BiddingItems"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/myTap_MySellings"
+        android:layout_below="@+id/myTap_MySellings"
+        android:layout_marginTop="16dp"
+        android:text="My Bidding Items" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignLeft="@+id/myTap_sellAnItem"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/myTap_AccountSet"
+        android:src="@drawable/description_posts" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="105dp"
+        android:layout_height="105dp"
+        android:layout_alignBaseline="@+id/myTap_AccountSet"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_marginLeft="38dp"
+        android:text="You have 0 items won"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+     android:background="@drawable/description_background"
+    android:orientation="vertical" >
+    
+     <TextView
+        android:id="@+id/sellerReceipt_ShippingAdress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textShipTo"
+        android:layout_centerHorizontal="true"       
+        android:inputType="textMultiLine"
+        android:text="Miradero de Humacao \n #77 Camino de Las Vistas \n 00791 Humacao PR\n 787-850-5557"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/sellerReceipt_ItemsInOrderText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textShipTo"
+        android:layout_below="@+id/sellerReceipt_ShippingAdress"
+        android:text="Items in this order:"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/sellerReceipt_buyerUN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="5dp"
+        android:text="Seller Username"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/sellerReceipt_orderID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/sellerReceipt_buyerUN"
+        android:layout_below="@+id/sellerReceipt_buyerUN"
+        android:text="Order ID"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textShipTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/sellerReceipt_orderID"
+        android:layout_below="@+id/sellerReceipt_orderID"
+        android:layout_marginTop="20dp"
+        android:text="Ship to:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/sellerReceipt_sellerUN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/sellerReceipt_orderID"
+        android:layout_below="@+id/sellerReceipt_orderID"
+        android:text="Purcased by: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ListView
+        android:id="@+id/sellerReceipt_itemList"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignLeft="@+id/sellerReceipt_ItemsInOrderText"
+        android:layout_below="@+id/sellerReceipt_ItemsInOrderText" >
+    </ListView>
+
+    <Button
+        android:id="@+id/sellerReceipt_okB"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="3dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="OK" />
+
+    <TextView
+        android:id="@+id/sellerReceipt_totalPayment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/sellerReceipt_itemList"
+        android:layout_below="@+id/sellerReceipt_itemList"
+        android:text="Total Payment: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/sellerReceipt_paymentMethod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/sellerReceipt_totalPayment"
+        android:layout_below="@+id/sellerReceipt_totalPayment"
+        android:layout_marginTop="5dp"
+        android:text="Payment receive to: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/sellerReceipt_Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/sellerReceipt_buyerUN"
+        android:text="Date: 10/10/10"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageView
+        android:id="@+id/sellerReceipt_paypalLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_alignLeft="@+id/sellerReceipt_paymentMethod"
+        android:layout_below="@+id/sellerReceipt_paymentMethod"
+        android:src="@drawable/pp_receiptlogo" />
+
+    <TextView
+        android:id="@+id/sellerReceipt_paypalEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/sellerReceipt_paypalLogo"
+        android:layout_marginLeft="14dp"
+        android:layout_toRightOf="@+id/sellerReceipt_paypalLogo"
+        android:text="lolo@gmail.com"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

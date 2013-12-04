@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/ordCheckRow_ProductPic"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="4dip"
+        android:layout_marginTop="4dip"
+        android:src="@drawable/android" />
+
+    <TextView
+        android:id="@+id/ordCheckRow_ProdName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ordCheckRow_ProductPic"
+        android:layout_toRightOf="@+id/ordCheckRow_ProductPic"
+        android:text="Product Name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <RatingBar
+        android:id="@+id/ordCheckRow_SellerRating"
+        style="@style/productRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ordCheckRow_SellerID"
+        android:layout_below="@+id/ordCheckRow_SellerID"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:rating="4.5" />
+
+    <TextView
+        android:id="@+id/ordCheckRow_Price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ordCheckRow_ProdName"
+        android:layout_alignRight="@+id/ordCheckRow_textQuantity"
+        android:layout_below="@+id/ordCheckRow_ProdName"
+        android:text="Price + Shipp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/ordCheckRow_SellerID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ordCheckRow_Price"
+        android:layout_below="@+id/ordCheckRow_Price"
+        android:layout_toLeftOf="@+id/ordCheckRow_textQuantity"
+        android:text="sellerUsername"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/ordCheckRow_RemaningTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ordCheckRow_SellerID"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="24dp"
+        android:text="2d 13h"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/ordCheckRow_QtyInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ordCheckRow_RemaningTime"
+        android:layout_toRightOf="@+id/ordCheckRow_textQuantity"
+        android:layout_marginRight="3dp"
+        android:ems="10"
+        android:text="1"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/ordCheckRow_textQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ordCheckRow_QtyInput"
+        android:layout_alignBottom="@+id/ordCheckRow_QtyInput"
+        android:layout_toLeftOf="@+id/ordCheckRow_RemaningTime"
+        android:text="Quantity: "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>

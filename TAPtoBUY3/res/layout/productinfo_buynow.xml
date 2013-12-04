@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/description_background"
+    >
+
+   <ImageView
+        android:id="@+id/BuyInfoProdPic"
+        android:layout_width="300dp"
+        android:layout_height="172dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/android" />
+
+    <TextView
+        android:id="@+id/BuyInfoProdTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/BuyInfoProdPic"
+        android:layout_below="@+id/BuyInfoProdPic"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="comic sans"
+        android:inputType="textMultiLine"
+        android:text="Product Title"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/BuyInfoProdBrand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/BuyInfoProdID"
+        android:layout_alignRight="@+id/buyInfotimeleft"
+        android:layout_below="@+id/BuyInfoProdID"
+        android:text="Brand"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/BuyInfoDimensions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/BuyInfoProdBrand"
+        android:layout_below="@+id/BuyInfoProdBrand"
+        android:text="Dimensions: 5.8 x 3.2 inches"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/BuyInfoProdID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/BuyInfoProdTitle"
+        android:layout_below="@+id/BuyInfoProdTitle"
+        android:layout_toLeftOf="@+id/buyInfotimeleft"
+        android:text="Product ID"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/BuyInfoSellerUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_alignLeft="@+id/BuyInfoDescription"
+        android:layout_alignRight="@+id/BuyInfoDescription"
+        android:layout_below="@+id/BuyInfoDescription"
+        android:text="SellerUsername"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/BuyInfoPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/BuyInfoSellerUserName"
+        android:layout_alignRight="@+id/BuyInfoSellerUserName"
+        android:layout_below="@+id/BuyInfoSellerUserName"
+        android:text="Price+Shipping"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/buyInfotimeleft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/BuyInfoProdTitle"
+        android:layout_below="@+id/BuyInfoProdTitle"
+        android:text="Time left: "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <RatingBar
+        android:id="@+id/BuyInfoSellerRate"
+        style="@style/productRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:isIndicator="true"
+        android:layout_alignRight="@+id/BuyInfoSellerUserName"
+        android:layout_alignTop="@+id/BuyInfoSellerUserName" />
+
+    <Button
+        android:id="@+id/BuyInfoAddToCartb"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="46dp"
+        android:layout_alignRight="@+id/BuyInfoPrice"
+        android:layout_below="@+id/BuyInfoPrice"
+        android:layout_marginTop="5dp"
+        android:text="Add to Cart" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@+id/BuyInfoDescription"
+        android:layout_below="@+id/BuyInfoDimensions"
+        android:text="Description:"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/BuyInfoDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:layout_marginTop="3dp"
+        android:layout_alignLeft="@+id/BuyInfoDimensions"
+        android:layout_alignRight="@+id/BuyInfoProdBrand"
+        android:layout_below="@+id/textView1"
+        android:inputType="textMultiLine"
+        android:text="Nokia 920, New, unlock 32Gb for any network black 8MP camera Windows 8 phone"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
+
+    <Button
+        android:id="@+id/BuyInfoBuyNowb"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_marginTop="5dp"
+        android:layout_width="100dp"
+        android:layout_height="46dp"
+        android:layout_alignLeft="@+id/BuyInfoPrice"
+        android:layout_below="@+id/BuyInfoPrice"
+        android:text="Buy Now" />
+
+</RelativeLayout>
