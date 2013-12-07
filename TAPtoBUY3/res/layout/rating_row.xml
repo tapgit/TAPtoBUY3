@@ -9,8 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
-        
+        android:layout_marginTop="10dp"        
         android:layout_marginLeft="15dp"
         android:text="Username"
         android:fontFamily="comic sans"
@@ -34,6 +33,8 @@
          style="?android:attr/buttonStyleSmall"
          android:layout_width="fill_parent"
          android:layout_height="2dp"
+         android:layout_marginRight="2dp"
+         android:layout_marginLeft="2dp"
          android:layout_alignParentLeft="true"
          android:layout_below="@+id/ratingBuyerUN"
          android:background="@drawable/customb2"

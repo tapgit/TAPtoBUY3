@@ -19,6 +19,8 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="fill_parent"
         android:layout_height="2dp"
+         android:layout_marginRight="2dp"
+         android:layout_marginLeft="2dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/bidRow_BidderUsername"        
         android:background="@drawable/customb2"
