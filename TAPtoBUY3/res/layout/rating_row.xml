@@ -33,7 +33,7 @@
          android:id="@+id/bidRow_separator"
          style="?android:attr/buttonStyleSmall"
          android:layout_width="fill_parent"
-         android:layout_height="4dp"
+         android:layout_height="2dp"
          android:layout_alignParentLeft="true"
          android:layout_below="@+id/ratingBuyerUN"
          android:background="@drawable/customb2"

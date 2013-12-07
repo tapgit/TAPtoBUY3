@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="3dp"
+        android:layout_marginLeft="5dp"
         android:text="Bidder Username"
         android:fontFamily="comic sans"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -18,7 +18,7 @@
         android:id="@+id/bidRow_separator"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="fill_parent"
-        android:layout_height="4dp"
+        android:layout_height="2dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/bidRow_BidderUsername"        
         android:background="@drawable/customb2"

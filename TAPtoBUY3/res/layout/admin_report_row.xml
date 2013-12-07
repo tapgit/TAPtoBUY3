@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/report_ProdName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:fontFamily="comic sans"
+        android:text="Product"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/report_soldQTY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/report_ProdName"
+        android:layout_alignBottom="@+id/report_ProdName"
+        android:layout_marginLeft="35dp"
+        android:layout_toRightOf="@+id/report_ProdName"       
+        android:text="5009000"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/report_revenue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/report_soldQTY"
+        android:layout_alignBottom="@+id/report_soldQTY"
+        android:layout_toRightOf="@+id/report_soldQTY"
+        android:layout_marginLeft="35dp"
+        android:text="10000000"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>
