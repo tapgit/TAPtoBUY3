@@ -124,11 +124,10 @@ public class OrderCustomListAdapter extends BaseAdapter implements OnClickListen
 			}        
 		}
 		itemRow.setOnClickListener(this);  
-		itemHolder.itemsQTY.setOnEditorActionListener(new OnEditorActionListener() {
-			
+		itemHolder.itemsQTY.setOnEditorActionListener(new OnEditorActionListener() {			
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				// TODO Auto-generated method stub
+				
 				return false;
 			}
 		});
