@@ -14,8 +14,8 @@ public class MyHistoryProduct {
 	private double sellerRate;
 	
 	public MyHistoryProduct(int id, int order_id, String title,
-			double paidPrice, double paidShippingPrice, String imgLink,
-			Bitmap img, String sellerUsername, double sellerRate) {
+			double paidPrice, double paidShippingPrice, String imgLink, 
+			String sellerUsername, double sellerRate) {
 		super();
 		this.id = id;
 		this.order_id = order_id;
@@ -23,7 +23,6 @@ public class MyHistoryProduct {
 		this.paidPrice = paidPrice;
 		this.paidShippingPrice = paidShippingPrice;
 		this.imgLink = imgLink;
-		this.img = img;
 		this.sellerUsername = sellerUsername;
 		this.sellerRate = sellerRate;
 	}

@@ -1,5 +1,7 @@
 package com.gui.taptobuy.datatask;
 
+import com.gui.taptobuy.Entities.Order;
+
 
 public class Main {
 	

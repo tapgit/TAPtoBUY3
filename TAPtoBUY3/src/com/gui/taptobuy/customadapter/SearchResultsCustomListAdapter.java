@@ -24,7 +24,6 @@ import com.gui.taptobuy.activity.SearchActivity.MyViewItem;
 
 import com.gui.taptobuy.datatask.ImageManager;
 import com.gui.taptobuy.datatask.Main;
-import com.gui.taptobuy.datatask.RatingsManager;
 import com.gui.taptobuy.phase1.R;
 
 import android.app.Dialog;

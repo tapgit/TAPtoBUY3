@@ -125,90 +125,90 @@ public class MyHistoryBoughtListCustomAdapter extends BaseAdapter implements OnC
 	@Override
 	public void onClick(View v) {
 		
-		MyViewHistory  itemHolder = (MyViewHistory) v.getTag(); 	
-		new productInfoTask().execute(itemHolder.item.getId() + "");
+		//MyViewHistory  itemHolder = (MyViewHistory) v.getTag(); 	
+		//new productInfoTask().execute(itemHolder.item.getId() + "");
 		
 	}
 
-	private Product getProductInfo(String productId){
-		HttpClient httpClient = new DefaultHttpClient();
-		String productInfoDir = Main.hostName +"/productInfo/" + productId;
-		HttpGet get = new HttpGet(productInfoDir);
-		get.setHeader("content-type", "application/json");
-		Product theItem = null;
-		try
-		{
-			HttpResponse resp = httpClient.execute(get);
-			if(resp.getStatusLine().getStatusCode() == 200){
-				String jsonString = EntityUtils.toString(resp.getEntity());
-				JSONObject json = new JSONObject(jsonString);
-				JSONObject itemInfoJson = json.getJSONObject("productInfo");
-				if(json.getBoolean("forBid")){
-					theItem = new ProductForAuctionInfo(itemInfoJson.getInt("id"), itemInfoJson.getString("title"), itemInfoJson.getString("timeRemaining"), 
-							itemInfoJson.getDouble("shippingPrice"), itemInfoJson.getString("imgLink"),  itemInfoJson.getString("sellerUsername"), 
-							itemInfoJson.getDouble("sellerRate"),  itemInfoJson.getDouble("startinBidPrice"),  itemInfoJson.getDouble("currentBidPrice"),  itemInfoJson.getInt("totalBids"),
-							itemInfoJson.getString("product"),itemInfoJson.getString("model"),itemInfoJson.getString("brand"),itemInfoJson.getString("dimensions"),itemInfoJson.getString("description"));
-				}
-				else{
-					theItem = new ProductForSaleInfo(itemInfoJson.getInt("id"), itemInfoJson.getString("title"), itemInfoJson.getString("timeRemaining"), 
-							itemInfoJson.getDouble("shippingPrice"), itemInfoJson.getString("imgLink"),  itemInfoJson.getString("sellerUsername"), 
-							itemInfoJson.getDouble("sellerRate"), itemInfoJson.getInt("remainingQuantity"), itemInfoJson.getDouble("instantPrice"),
-							itemInfoJson.getString("product"),itemInfoJson.getString("model"),itemInfoJson.getString("brand"),itemInfoJson.getString("dimensions"),itemInfoJson.getString("description"));
-				}
-			}
-			else{
-				Log.e("JSON","ProductInfo json could not be downloaded.");
-			}
-		}
-		catch(Exception ex)
-		{
-			Log.e("Product Info","Error!", ex);
-		}
-		return theItem;
-	}
-
-	private class productInfoTask extends AsyncTask<String,Void,Product> {
-		Product downloadedProductInfo;
-		Dialog dialog;
-		Intent intent;		
-		protected void onPreExecute() {
-			super.onPreExecute();
-			dialog = ProgressDialog.show(activity, "Please wait...", "Loading Item");
-			dialog.show();
-		}
-		protected Product doInBackground(String... params) {
-			return getProductInfo(params[0]);//get product info
-		}
-		protected void onPostExecute(Product productInfo ) {
-			downloadedProductInfo = productInfo;
-			//download image
-			new DownloadImageTask().execute(productInfo.getImgLink());
-		
-		}			
-		private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {			
-		
-			protected Bitmap doInBackground(String... params) {
-				return ImageManager.downloadImage(params[0]);
-			}
-			protected void onPostExecute(Bitmap result) {
-				downloadedProductInfo.setImg(result);
-				if(downloadedProductInfo instanceof ProductForAuctionInfo){//for auction
-					BidProductInfoActivity.showingProductInfo = (ProductForAuctionInfo) downloadedProductInfo;
-					intent = new Intent(activity, BidProductInfoActivity.class);
-					intent.putExtra("previousActivity", "MyHistory");
-					dialog.dismiss();					
-					activity.startActivity(intent);			
-				}
-				else{//for sale
-					BuyItProductInfoActivity.showingProductInfo = (ProductForSaleInfo) downloadedProductInfo;					
-					intent = new Intent(activity, BuyItProductInfoActivity.class);
-					intent.putExtra("previousActivity", "MyHistory");				
-					dialog.dismiss();	
-					activity.startActivity(intent);
-				}
-			}
-		}
-	}
+//	private Product getProductInfo(String productId){
+//		HttpClient httpClient = new DefaultHttpClient();
+//		String productInfoDir = Main.hostName +"/productInfo/" + productId;
+//		HttpGet get = new HttpGet(productInfoDir);
+//		get.setHeader("content-type", "application/json");
+//		Product theItem = null;
+//		try
+//		{
+//			HttpResponse resp = httpClient.execute(get);
+//			if(resp.getStatusLine().getStatusCode() == 200){
+//				String jsonString = EntityUtils.toString(resp.getEntity());
+//				JSONObject json = new JSONObject(jsonString);
+//				JSONObject itemInfoJson = json.getJSONObject("productInfo");
+//				if(json.getBoolean("forBid")){
+//					theItem = new ProductForAuctionInfo(itemInfoJson.getInt("id"), itemInfoJson.getString("title"), itemInfoJson.getString("timeRemaining"), 
+//							itemInfoJson.getDouble("shippingPrice"), itemInfoJson.getString("imgLink"),  itemInfoJson.getString("sellerUsername"), 
+//							itemInfoJson.getDouble("sellerRate"),  itemInfoJson.getDouble("startinBidPrice"),  itemInfoJson.getDouble("currentBidPrice"),  itemInfoJson.getInt("totalBids"),
+//							itemInfoJson.getString("product"),itemInfoJson.getString("model"),itemInfoJson.getString("brand"),itemInfoJson.getString("dimensions"),itemInfoJson.getString("description"));
+//				}
+//				else{
+//					theItem = new ProductForSaleInfo(itemInfoJson.getInt("id"), itemInfoJson.getString("title"), itemInfoJson.getString("timeRemaining"), 
+//							itemInfoJson.getDouble("shippingPrice"), itemInfoJson.getString("imgLink"),  itemInfoJson.getString("sellerUsername"), 
+//							itemInfoJson.getDouble("sellerRate"), itemInfoJson.getInt("remainingQuantity"), itemInfoJson.getDouble("instantPrice"),
+//							itemInfoJson.getString("product"),itemInfoJson.getString("model"),itemInfoJson.getString("brand"),itemInfoJson.getString("dimensions"),itemInfoJson.getString("description"));
+//				}
+//			}
+//			else{
+//				Log.e("JSON","ProductInfo json could not be downloaded.");
+//			}
+//		}
+//		catch(Exception ex)
+//		{
+//			Log.e("Product Info","Error!", ex);
+//		}
+//		return theItem;
+//	}
+//
+//	private class productInfoTask extends AsyncTask<String,Void,Product> {
+//		Product downloadedProductInfo;
+//		Dialog dialog;
+//		Intent intent;		
+//		protected void onPreExecute() {
+//			super.onPreExecute();
+//			dialog = ProgressDialog.show(activity, "Please wait...", "Loading Item");
+//			dialog.show();
+//		}
+//		protected Product doInBackground(String... params) {
+//			return getProductInfo(params[0]);//get product info
+//		}
+//		protected void onPostExecute(Product productInfo ) {
+//			downloadedProductInfo = productInfo;
+//			//download image
+//			new DownloadImageTask().execute(productInfo.getImgLink());
+//		
+//		}			
+//		private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {			
+//		
+//			protected Bitmap doInBackground(String... params) {
+//				return ImageManager.downloadImage(params[0]);
+//			}
+//			protected void onPostExecute(Bitmap result) {
+//				downloadedProductInfo.setImg(result);
+//				if(downloadedProductInfo instanceof ProductForAuctionInfo){//for auction
+//					BidProductInfoActivity.showingProductInfo = (ProductForAuctionInfo) downloadedProductInfo;
+//					intent = new Intent(activity, BidProductInfoActivity.class);
+//					intent.putExtra("previousActivity", "MyHistory");
+//					dialog.dismiss();					
+//					activity.startActivity(intent);			
+//				}
+//				else{//for sale
+//					BuyItProductInfoActivity.showingProductInfo = (ProductForSaleInfo) downloadedProductInfo;					
+//					intent = new Intent(activity, BuyItProductInfoActivity.class);
+//					intent.putExtra("previousActivity", "MyHistory");				
+//					dialog.dismiss();	
+//					activity.startActivity(intent);
+//				}
+//			}
+//		}
+//	}
 
 
 }

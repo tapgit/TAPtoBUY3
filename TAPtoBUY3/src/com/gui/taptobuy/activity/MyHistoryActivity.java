@@ -92,10 +92,10 @@ public class MyHistoryActivity extends Activity{
 					j = searchElement.getJSONObject("item");
 					if(searchElement.getBoolean("forBid")){
 						//anItem = new MyHistoryProductForAuction(j.getInt("id"), j.getInt("order_id"), j.getString("title"), j.getDouble("paidPrice"), j.getDouble("paidShippingPrice"), j.getString("imgLink"),j.getString("sellerUsername"),-1,-1);
-						anItem = new MyHistoryProductForAuction(j.getInt("id"), j.getInt("order_id"), j.getString("title"), j.getDouble("paidPrice"), j.getDouble("paidShippingPrice"),  j.getString("imgLink"), null, j.getString("sellerUsername"),-1,-1);
+						anItem = new MyHistoryProductForAuction(j.getInt("id"), j.getInt("order_id"), j.getString("title"), j.getDouble("paidPrice"), j.getDouble("paidShippingPrice"),  j.getString("imgLink"), j.getString("sellerUsername"),-1,-1);
 					}
 					else{
-						anItem = new MyHistoryProductForSale(j.getInt("id"), j.getInt("order_id"), j.getString("title"), j.getDouble("paidPrice"), j.getDouble("paidShippingPrice"), j.getString("imgLink"),null,j.getString("sellerUsername"), -1, -1);
+						anItem = new MyHistoryProductForSale(j.getInt("id"), j.getInt("order_id"), j.getString("title"), j.getDouble("paidPrice"), j.getDouble("paidShippingPrice"), j.getString("imgLink"),j.getString("sellerUsername"), -1, -1);
 					}
 					if(searchElement.getBoolean("sold")){
 						historySoldItems.add(anItem);

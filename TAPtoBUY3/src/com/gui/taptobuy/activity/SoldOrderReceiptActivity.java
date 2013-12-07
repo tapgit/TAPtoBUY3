@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.gui.taptobuy.Entities.Order;
 import com.gui.taptobuy.phase1.R;
 
 public class SoldOrderReceiptActivity extends Activity implements OnClickListener {
@@ -21,20 +22,19 @@ public class SoldOrderReceiptActivity extends Activity implements OnClickListene
 	private TextView paymentCard;
 	private TextView purchasedDate;
 	private Button okButton;
+	public static Order showingOrder;
 	
 	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);		
-		setContentView(R.layout.order_receipt);	
+		setContentView(R.layout.seller_receipt);	
 		
-		boughtItems = (ListView)findViewById(R.id.receipt_itemList);
-		okButton = (Button)findViewById(R.id.receipt_okB);
-		buyerUserName = (TextView)findViewById(R.id.receipt_buyerUN);
-		orderID = (TextView)findViewById(R.id.receipt_orderID);
-		sellerID = (TextView)findViewById(R.id.receipt_sellerUN);
-		shippAdd = (TextView)findViewById(R.id.receipt_ShippingAdress);
-		totalPayment = (TextView)findViewById(R.id.receipt_totalPayment);
-		paymentCard = (TextView)findViewById(R.id.receipt_paymentMethod);
-		purchasedDate = (TextView)findViewById(R.id.receipt_Date);		
+		boughtItems = (ListView)findViewById(R.id.sellerReceipt_itemList);
+		okButton = (Button)findViewById(R.id.sellerReceipt_okB);
+		orderID = (TextView)findViewById(R.id.sellerReceipt_orderID);
+		totalPayment = (TextView)findViewById(R.id.sellerReceipt_totalPayment);
+		paymentCard = (TextView)findViewById(R.id.sellerReceipt_paymentMethod);
+		purchasedDate = (TextView)findViewById(R.id.sellerReceipt_Date);	
+		
 	}
 
 	@Override

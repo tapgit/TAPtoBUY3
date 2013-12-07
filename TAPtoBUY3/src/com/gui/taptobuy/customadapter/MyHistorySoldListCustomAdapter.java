@@ -7,11 +7,13 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.gui.taptobuy.Entities.MyHistoryProduct;
 import com.gui.taptobuy.Entities.MyHistoryProductForAuction;
 import com.gui.taptobuy.Entities.MyHistoryProductForSale;
+import com.gui.taptobuy.Entities.Order;
 import com.gui.taptobuy.Entities.Product;
 import com.gui.taptobuy.Entities.ProductForAuction;
 import com.gui.taptobuy.Entities.ProductForAuctionInfo;
@@ -20,7 +22,10 @@ import com.gui.taptobuy.Entities.ProductForSaleInfo;
 import com.gui.taptobuy.activity.BidProductInfoActivity;
 import com.gui.taptobuy.activity.BuyItProductInfoActivity;
 import com.gui.taptobuy.activity.MyHistoryActivity;
+import com.gui.taptobuy.activity.PurchasedOrderReceiptActivity;
+import com.gui.taptobuy.activity.SearchActivity;
 import com.gui.taptobuy.activity.MyHistoryActivity.MyViewHistory;
+import com.gui.taptobuy.activity.SoldOrderReceiptActivity;
 
 import com.gui.taptobuy.datatask.ImageManager;
 import com.gui.taptobuy.datatask.Main;
@@ -46,6 +51,7 @@ public class MyHistorySoldListCustomAdapter extends BaseAdapter implements OnCli
 	private MyHistoryActivity activity;
 	private LayoutInflater layoutInflater;
 	private ArrayList<MyHistoryProduct> items;	
+	public static Order theOrder;
 
 	public MyHistorySoldListCustomAdapter (MyHistoryActivity a, LayoutInflater l, ArrayList<MyHistoryProduct> items)
 	{
@@ -120,87 +126,92 @@ public class MyHistorySoldListCustomAdapter extends BaseAdapter implements OnCli
 
 	@Override
 	public void onClick(View v) {
+		MyViewHistory  itemHolder = (MyViewHistory) v.getTag(); 
+		String userId = Main.userId + "";
+		String productId = itemHolder.item.getId() + "";
+		String orderId = itemHolder.item.getOrder_id() + "";
+		String sold = "true";
+		String forBid = "false";
+		if(itemHolder.item instanceof MyHistoryProductForAuction){
+			forBid = "true";
+		}
 		
-		MyViewHistory  itemHolder = (MyViewHistory) v.getTag(); 	
-		new productInfoTask().execute(itemHolder.item.getId() + "");		
+		new orderReceiptTask().execute(userId,productId,orderId,sold,forBid);
 	}
 
-	private Product getProductInfo(String productId){
+	private Order getOrderReceipt(String userId, String productId, String orderId, String sold, String forBid){
 		HttpClient httpClient = new DefaultHttpClient();
-		String productInfoDir = Main.hostName +"/productInfo/" + productId;
-		HttpGet get = new HttpGet(productInfoDir);
+		String orderDir = Main.hostName +"/orders/" + userId + "/" + productId + "/" + orderId + "/" + sold + "/" + forBid;
+		HttpGet get = new HttpGet(orderDir);
 		get.setHeader("content-type", "application/json");
-		Product theItem = null;
+		Order theOrder = null;
 		try
 		{
 			HttpResponse resp = httpClient.execute(get);
 			if(resp.getStatusLine().getStatusCode() == 200){
 				String jsonString = EntityUtils.toString(resp.getEntity());
 				JSONObject json = new JSONObject(jsonString);
-				JSONObject itemInfoJson = json.getJSONObject("productInfo");
+				JSONObject orderJson = json.getJSONObject("order");
+				JSONArray itemsArray = orderJson.getJSONArray("items");
+				MyHistoryProduct[] products = null;
+				JSONObject tmpItemJson = null;
+				
 				if(json.getBoolean("forBid")){
-					theItem = new ProductForAuctionInfo(itemInfoJson.getInt("id"), itemInfoJson.getString("title"), itemInfoJson.getString("timeRemaining"), 
-							itemInfoJson.getDouble("shippingPrice"), itemInfoJson.getString("imgLink"),  itemInfoJson.getString("sellerUsername"), 
-							itemInfoJson.getDouble("sellerRate"),  itemInfoJson.getDouble("startinBidPrice"),  itemInfoJson.getDouble("currentBidPrice"),  itemInfoJson.getInt("totalBids"),
-							itemInfoJson.getString("product"),itemInfoJson.getString("model"),itemInfoJson.getString("brand"),itemInfoJson.getString("dimensions"),itemInfoJson.getString("description"));
+					tmpItemJson = itemsArray.getJSONObject(0);
+					products = new MyHistoryProductForAuction[1];
+					products[0] = new MyHistoryProductForAuction(tmpItemJson.getInt("id"), tmpItemJson.getInt("order_id"), tmpItemJson.getString("title"),
+							tmpItemJson.getDouble("paidPrice"), tmpItemJson.getInt("paidShippingPrice"), tmpItemJson.getString("imgLink"),
+							tmpItemJson.getString("sellerUsername"), tmpItemJson.getDouble("sellerRate"), tmpItemJson.getInt("bidsAmount"));
 				}
 				else{
-					theItem = new ProductForSaleInfo(itemInfoJson.getInt("id"), itemInfoJson.getString("title"), itemInfoJson.getString("timeRemaining"), 
-							itemInfoJson.getDouble("shippingPrice"), itemInfoJson.getString("imgLink"),  itemInfoJson.getString("sellerUsername"), 
-							itemInfoJson.getDouble("sellerRate"), itemInfoJson.getInt("remainingQuantity"), itemInfoJson.getDouble("instantPrice"),
-							itemInfoJson.getString("product"),itemInfoJson.getString("model"),itemInfoJson.getString("brand"),itemInfoJson.getString("dimensions"),itemInfoJson.getString("description"));
+					products = new MyHistoryProductForSale[itemsArray.length()];
+					for(int i=0; i<itemsArray.length();i++){
+						tmpItemJson = itemsArray.getJSONObject(i);
+						products[i] = new MyHistoryProductForSale(tmpItemJson.getInt("id"), tmpItemJson.getInt("order_id"), tmpItemJson.getString("title"),
+								tmpItemJson.getDouble("paidPrice"), tmpItemJson.getInt("paidShippingPrice"), tmpItemJson.getString("imgLink"),
+								tmpItemJson.getString("sellerUsername"), tmpItemJson.getDouble("sellerRate"), tmpItemJson.getInt("quantity"));
+					}
 				}
+				theOrder = new Order(orderJson.getInt("id"), orderJson.getString("date"), orderJson.getString("sellerUsername"), orderJson.getString("buyerUsername"), orderJson.getString("shippingAddressStr"),
+						orderJson.getString("paymentMethod"), orderJson.getDouble("paidPrice"), orderJson.getDouble("shippingPrice"), products);
 			}
 			else{
-				Log.e("JSON","ProductInfo json could not be downloaded.");
+				Log.e("JSON","Order json could not be downloaded.");
 			}
 		}
 		catch(Exception ex)
 		{
-			Log.e("Product Info","Error!", ex);
+			Log.e("Order","Error!", ex);
 		}
-		return theItem;
+		return theOrder;
 	}
 
-	private class productInfoTask extends AsyncTask<String,Void,Product> {
-		Product downloadedProductInfo;
-		Dialog dialog;
-		Intent intent;		
-		protected void onPreExecute() {
-			super.onPreExecute();
-			dialog = ProgressDialog.show(activity, "Please wait...", "Loading Item");
-			dialog.show();
-		}
-		protected Product doInBackground(String... params) {
-			return getProductInfo(params[0]);//get product info
-		}
-		protected void onPostExecute(Product productInfo ) {
-			downloadedProductInfo = productInfo;
-			//download image
-			new DownloadImageTask().execute(productInfo.getImgLink());
+	private class orderReceiptTask extends AsyncTask<String,Void,Order> {
+		public  int downloadadImagesIndex = 0;
 		
-		}			
-		private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {			
-		
-			protected Bitmap doInBackground(String... params) {
-				return ImageManager.downloadImage(params[0]);
+		protected Order doInBackground(String... params) {
+			return getOrderReceipt(params[0], params[1],params[2],params[3],params[4]);//get order receipt
+		}
+		protected void onPostExecute(Order theOrder) {
+			//download images
+			//MyHistoryProduct[] products = theOrder.getProducts();
+			//for(MyHistoryProduct itm: products){
+			//	new DownloadImageTask().execute(itm.getImgLink());				
+			//}
+//			itemsList.setAdapter(new SearchResultsCustomListAdapter(SearchActivity.this,SearchActivity.this.pic,SearchActivity.this.layoutInflator, searchResultItems));
+			//SoldOrderReceiptActivity.showingOrder = theOrder;
+			Intent intent = new Intent(activity, SoldOrderReceiptActivity.class);
+			activity.startActivity(intent);
+		}
+				
+		private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+
+			protected Bitmap doInBackground(String... urls) {
+				return ImageManager.downloadImage(urls[0]);
 			}
 			protected void onPostExecute(Bitmap result) {
-				downloadedProductInfo.setImg(result);
-				if(downloadedProductInfo instanceof ProductForAuctionInfo){//for auction
-					BidProductInfoActivity.showingProductInfo = (ProductForAuctionInfo) downloadedProductInfo;
-					intent = new Intent(activity, BidProductInfoActivity.class);
-					intent.putExtra("previousActivity", "MyHistory");
-					dialog.dismiss();					
-					activity.startActivity(intent);			
-				}
-				else{//for sale
-					BuyItProductInfoActivity.showingProductInfo = (ProductForSaleInfo) downloadedProductInfo;					
-					intent = new Intent(activity, BuyItProductInfoActivity.class);
-					intent.putExtra("previousActivity", "MyHistory");				
-					dialog.dismiss();	
-					activity.startActivity(intent);
-				}
+//				itemsList.invalidateViews();
+				theOrder.getProducts()[downloadadImagesIndex++].setImg(result);
 			}
 		}
 	}

@@ -26,22 +26,11 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/receipt_buyerUN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="2dp"
-        android:layout_marginLeft="5dp"
-        android:text="Buyer Username"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
         android:id="@+id/receipt_orderID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/receipt_buyerUN"
-        android:layout_below="@+id/receipt_buyerUN"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
         android:text="Order ID"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -51,23 +40,14 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/receipt_orderID"
         android:layout_below="@+id/receipt_orderID"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:text="Ship to:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/receipt_sellerUN"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/receipt_orderID"
-        android:layout_below="@+id/receipt_orderID"
-        android:text="Sold by: "
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ListView
         android:id="@+id/receipt_itemList"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="200dp"
         android:layout_alignLeft="@+id/receipt_ItemsInOrderText"
         android:layout_below="@+id/receipt_ItemsInOrderText" >
     </ListView>
@@ -104,10 +84,8 @@
         android:id="@+id/receipt_Date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="7dp"
-        android:layout_below="@+id/receipt_paymentMethod"
+        android:layout_alignLeft="@+id/receipt_orderID"
+        android:layout_below="@+id/receipt_orderID"
         android:text="Date: 10/10/10"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

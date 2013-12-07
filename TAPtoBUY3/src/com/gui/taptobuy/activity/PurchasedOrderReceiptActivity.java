@@ -27,15 +27,15 @@ public class PurchasedOrderReceiptActivity extends Activity implements OnClickLi
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.order_receipt);	
 		
-		boughtItems = (ListView)findViewById(R.id.receipt_itemList);
-		okButton = (Button)findViewById(R.id.receipt_okB);
-		buyerUserName = (TextView)findViewById(R.id.receipt_buyerUN);
-		orderID = (TextView)findViewById(R.id.receipt_orderID);
-		sellerID = (TextView)findViewById(R.id.receipt_sellerUN);
-		shippAdd = (TextView)findViewById(R.id.receipt_ShippingAdress);
-		totalPayment = (TextView)findViewById(R.id.receipt_totalPayment);
-		paymentCard = (TextView)findViewById(R.id.receipt_paymentMethod);
-		purchasedDate = (TextView)findViewById(R.id.receipt_Date);	
+//		boughtItems = (ListView)findViewById(R.id.receipt_itemList);
+//		okButton = (Button)findViewById(R.id.receipt_okB);
+//		buyerUserName = (TextView)findViewById(R.id.receipt_buyerUN);
+//		orderID = (TextView)findViewById(R.id.receipt_orderID);
+//		sellerID = (TextView)findViewById(R.id.receipt_sellerUN);
+//		shippAdd = (TextView)findViewById(R.id.receipt_ShippingAdress);
+//		totalPayment = (TextView)findViewById(R.id.receipt_totalPayment);
+//		paymentCard = (TextView)findViewById(R.id.receipt_paymentMethod);
+//		purchasedDate = (TextView)findViewById(R.id.receipt_Date);	
 		
 		okButton.setOnClickListener(this);
 	}	
