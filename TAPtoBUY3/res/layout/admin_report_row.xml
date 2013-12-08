@@ -9,10 +9,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:fontFamily="comic sans"
         android:text="Product"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <Button
+        android:id="@+id/report_split"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/report_revenue"
+        android:background="@drawable/customb2"
+        android:clickable="false" />
 
     <TextView
         android:id="@+id/report_soldQTY"
@@ -20,9 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/report_ProdName"
         android:layout_alignBottom="@+id/report_ProdName"
-        android:layout_marginLeft="35dp"
-        android:layout_toRightOf="@+id/report_ProdName"       
-        android:text="5009000"
+        android:layout_centerHorizontal="true"
+        android:text="Sold amount"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -31,9 +40,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/report_soldQTY"
         android:layout_alignBottom="@+id/report_soldQTY"
-        android:layout_toRightOf="@+id/report_soldQTY"
-        android:layout_marginLeft="35dp"
-        android:text="10000000"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:text="Revenue"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
