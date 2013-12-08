@@ -53,13 +53,6 @@ public class CategoryActivity extends Activity implements OnItemClickListener {
 	private ArrayList<Category> getSubCategories(String clickedCategoryId){//clickedCategoryId =>parentCat Id
 		HttpClient httpClient = new DefaultHttpClient();
 		String categoryDir = Main.hostName + "/subcategoriesof/" + clickedCategoryId;
-//		if(currentParentCategoryName == null && clickedCategory.equals("All")){
-//			categoryDir+="All";
-//		}
-//		else{
-//			categoryDir+=currentParentCategoryName + "/" + clickedCategory;
-//		}
-		//currentParentCategoryName = new String(clickedCategoryId);
 		HttpGet get = new HttpGet(categoryDir);
 		get.setHeader("content-type", "application/json");
 		try

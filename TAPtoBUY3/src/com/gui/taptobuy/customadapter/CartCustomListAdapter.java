@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.webkit.WebView.FindListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -218,12 +217,6 @@ public class CartCustomListAdapter extends BaseAdapter implements OnClickListene
 				JSONObject json = new JSONObject(jsonString);
 				JSONObject itemInfoJson = json.getJSONObject("productInfo");
 				if(!json.getBoolean("forBid")){
-					//					theItem = new ProductForAuctionInfo(itemInfoJson.getInt("id"), itemInfoJson.getString("title"), itemInfoJson.getString("timeRemaining"),
-					//							itemInfoJson.getDouble("shippingPrice"), itemInfoJson.getString("imgLink"), itemInfoJson.getString("sellerUsername"),
-					//							itemInfoJson.getDouble("sellerRate"), itemInfoJson.getDouble("startinBidPrice"), itemInfoJson.getDouble("currentBidPrice"), itemInfoJson.getInt("totalBids"),
-					//							itemInfoJson.getString("product"),itemInfoJson.getString("model"),itemInfoJson.getString("brand"),itemInfoJson.getString("dimensions"),itemInfoJson.getString("description"));
-					//				}
-					//				else{
 					theItem = new ProductForSaleInfo(itemInfoJson.getInt("id"), itemInfoJson.getString("title"), itemInfoJson.getString("timeRemaining"),
 							itemInfoJson.getDouble("shippingPrice"), itemInfoJson.getString("imgLink"), itemInfoJson.getString("sellerUsername"),
 							itemInfoJson.getDouble("sellerRate"), itemInfoJson.getInt("remainingQuantity"), itemInfoJson.getDouble("instantPrice"),

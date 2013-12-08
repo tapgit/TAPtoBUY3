@@ -52,6 +52,7 @@ public class MyHistorySoldListCustomAdapter extends BaseAdapter implements OnCli
 	private LayoutInflater layoutInflater;
 	private ArrayList<MyHistoryProduct> items;	
 	public static Order theOrder;
+	private ArrayList<MyHistoryProduct> itemsInSelectedOrder;
 
 	public MyHistorySoldListCustomAdapter (MyHistoryActivity a, LayoutInflater l, ArrayList<MyHistoryProduct> items)
 	{
@@ -127,21 +128,23 @@ public class MyHistorySoldListCustomAdapter extends BaseAdapter implements OnCli
 	@Override
 	public void onClick(View v) {
 		MyViewHistory  itemHolder = (MyViewHistory) v.getTag(); 
-		String userId = Main.userId + "";
-		String productId = itemHolder.item.getId() + "";
+		itemsInSelectedOrder = new ArrayList<MyHistoryProduct>();
+		for(MyHistoryProduct p: items){
+			if(p.getOrder_id()==itemHolder.item.getOrder_id() && p.getId() == itemHolder.item.getId()){
+				itemsInSelectedOrder.add(p);
+			}
+		}
 		String orderId = itemHolder.item.getOrder_id() + "";
-		String sold = "true";
 		String forBid = "false";
-		if(itemHolder.item instanceof MyHistoryProductForAuction){
+		if(itemsInSelectedOrder.get(0) instanceof MyHistoryProductForAuction){
 			forBid = "true";
 		}
-		
-		new orderReceiptTask().execute(userId,productId,orderId,sold,forBid);
+		new orderReceiptTask().execute(orderId, forBid);
 	}
 
-	private Order getOrderReceipt(String userId, String productId, String orderId, String sold, String forBid){
+	private Order getOrderReceipt(String orderId, String forBid){
 		HttpClient httpClient = new DefaultHttpClient();
-		String orderDir = Main.hostName +"/orders/" + userId + "/" + productId + "/" + orderId + "/" + sold + "/" + forBid;
+		String orderDir = Main.hostName +"/orders/" + orderId + "/" + forBid + "/true";
 		HttpGet get = new HttpGet(orderDir);
 		get.setHeader("content-type", "application/json");
 		Order theOrder = null;
@@ -152,28 +155,9 @@ public class MyHistorySoldListCustomAdapter extends BaseAdapter implements OnCli
 				String jsonString = EntityUtils.toString(resp.getEntity());
 				JSONObject json = new JSONObject(jsonString);
 				JSONObject orderJson = json.getJSONObject("order");
-				JSONArray itemsArray = orderJson.getJSONArray("items");
-				MyHistoryProduct[] products = null;
-				JSONObject tmpItemJson = null;
-				
-				if(json.getBoolean("forBid")){
-					tmpItemJson = itemsArray.getJSONObject(0);
-					products = new MyHistoryProductForAuction[1];
-					products[0] = new MyHistoryProductForAuction(tmpItemJson.getInt("id"), tmpItemJson.getInt("order_id"), tmpItemJson.getString("title"),
-							tmpItemJson.getDouble("paidPrice"), tmpItemJson.getInt("paidShippingPrice"), tmpItemJson.getString("imgLink"),
-							tmpItemJson.getString("sellerUsername"), tmpItemJson.getDouble("sellerRate"), tmpItemJson.getInt("bidsAmount"));
-				}
-				else{
-					products = new MyHistoryProductForSale[itemsArray.length()];
-					for(int i=0; i<itemsArray.length();i++){
-						tmpItemJson = itemsArray.getJSONObject(i);
-						products[i] = new MyHistoryProductForSale(tmpItemJson.getInt("id"), tmpItemJson.getInt("order_id"), tmpItemJson.getString("title"),
-								tmpItemJson.getDouble("paidPrice"), tmpItemJson.getInt("paidShippingPrice"), tmpItemJson.getString("imgLink"),
-								tmpItemJson.getString("sellerUsername"), tmpItemJson.getDouble("sellerRate"), tmpItemJson.getInt("quantity"));
-					}
-				}
-				theOrder = new Order(orderJson.getInt("id"), orderJson.getString("date"), orderJson.getString("sellerUsername"), orderJson.getString("buyerUsername"), orderJson.getString("shippingAddressStr"),
-						orderJson.getString("paymentMethod"), orderJson.getDouble("paidPrice"), orderJson.getDouble("shippingPrice"), products);
+
+				theOrder = new Order(orderJson.getInt("id"), orderJson.getString("date"), null, orderJson.getString("paymentMethod"), 
+						orderJson.getDouble("paidPrice"), -1, null);
 			}
 			else{
 				Log.e("JSON","Order json could not be downloaded.");
@@ -187,32 +171,17 @@ public class MyHistorySoldListCustomAdapter extends BaseAdapter implements OnCli
 	}
 
 	private class orderReceiptTask extends AsyncTask<String,Void,Order> {
-		public  int downloadadImagesIndex = 0;
-		
+
 		protected Order doInBackground(String... params) {
-			return getOrderReceipt(params[0], params[1],params[2],params[3],params[4]);//get order receipt
+			return getOrderReceipt(params[0], params[1]);//get order receipt
 		}
 		protected void onPostExecute(Order theOrder) {
-			//download images
-			//MyHistoryProduct[] products = theOrder.getProducts();
-			//for(MyHistoryProduct itm: products){
-			//	new DownloadImageTask().execute(itm.getImgLink());				
-			//}
-//			itemsList.setAdapter(new SearchResultsCustomListAdapter(SearchActivity.this,SearchActivity.this.pic,SearchActivity.this.layoutInflator, searchResultItems));
-			//SoldOrderReceiptActivity.showingOrder = theOrder;
+			theOrder.setProducts(itemsInSelectedOrder);
+			SoldOrderReceiptActivity.showingOrder = theOrder;
 			Intent intent = new Intent(activity, SoldOrderReceiptActivity.class);
 			activity.startActivity(intent);
 		}
 				
-		private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
-			protected Bitmap doInBackground(String... urls) {
-				return ImageManager.downloadImage(urls[0]);
-			}
-			protected void onPostExecute(Bitmap result) {
-//				itemsList.invalidateViews();
-				theOrder.getProducts()[downloadadImagesIndex++].setImg(result);
-			}
-		}
 	}
 }

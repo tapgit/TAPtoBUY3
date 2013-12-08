@@ -1,24 +1,21 @@
 package com.gui.taptobuy.Entities;
 
+import java.util.ArrayList;
+
 public class Order {
 	private int id;
 	private String date;
-	private String sellerUsername;
-	private String buyerUsername;
 	private String shippingAddressStr;
 	private String paymentMethod; //CreditCard for purchased order & Paypal email for sold order
 	private double paidPrice;
 	private double shippingPrice;
-	private MyHistoryProduct[] products;
-	public Order(int id, String date, String sellerUsername,
-			String buyerUsername, String shippingAddressStr,
+	private ArrayList<MyHistoryProduct> products;
+	public Order(int id, String date, String shippingAddressStr,
 			String paymentMethod, double paidPrice, double shippingPrice,
-			MyHistoryProduct[] products) {
+			ArrayList<MyHistoryProduct> products) {
 		super();
 		this.id = id;
 		this.date = date;
-		this.sellerUsername = sellerUsername;
-		this.buyerUsername = buyerUsername;
 		this.shippingAddressStr = shippingAddressStr;
 		this.paymentMethod = paymentMethod;
 		this.paidPrice = paidPrice;
@@ -36,18 +33,6 @@ public class Order {
 	}
 	public void setDate(String date) {
 		this.date = date;
-	}
-	public String getSellerUsername() {
-		return sellerUsername;
-	}
-	public void setSellerUsername(String sellerUsername) {
-		this.sellerUsername = sellerUsername;
-	}
-	public String getBuyerUsername() {
-		return buyerUsername;
-	}
-	public void setBuyerUsername(String buyerUsername) {
-		this.buyerUsername = buyerUsername;
 	}
 	public String getShippingAddressStr() {
 		return shippingAddressStr;
@@ -73,10 +58,10 @@ public class Order {
 	public void setShippingPrice(double shippingPrice) {
 		this.shippingPrice = shippingPrice;
 	}
-	public MyHistoryProduct[] getProducts() {
+	public ArrayList<MyHistoryProduct> getProducts() {
 		return products;
 	}
-	public void setProducts(MyHistoryProduct[] products) {
+	public void setProducts(ArrayList<MyHistoryProduct> products) {
 		this.products = products;
 	}
 	
