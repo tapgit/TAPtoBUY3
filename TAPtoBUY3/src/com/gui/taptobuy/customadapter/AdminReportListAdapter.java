@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,17 +19,14 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.gui.taptobuy.Entities.MyBiddingsProduct;
 import com.gui.taptobuy.Entities.Product;
 import com.gui.taptobuy.Entities.ProductForAuctionInfo;
 import com.gui.taptobuy.Entities.ProductReport;
 import com.gui.taptobuy.activity.AdministratorActivity;
 import com.gui.taptobuy.activity.AdministratorActivity.MyViewReport;
 import com.gui.taptobuy.activity.BidProductInfoActivity;
-import com.gui.taptobuy.activity.MyBiddingActivity;
 import com.gui.taptobuy.activity.MyBiddingActivity.MyViewAuctionItem;
 
 import com.gui.taptobuy.datatask.ImageManager;

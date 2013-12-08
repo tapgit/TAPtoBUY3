@@ -2,6 +2,7 @@ package com.gui.taptobuy.activity;
 
 import com.gui.taptobuy.Entities.ProductForSale;
 import com.gui.taptobuy.Entities.ProductForSaleInfo;
+import com.gui.taptobuy.datatask.Main;
 import com.gui.taptobuy.phase1.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -86,14 +87,19 @@ public class BuyItProductInfoActivity extends Activity implements OnClickListene
 	public void onClick(View v) {
 
 		if(v.getId() == R.id.BuyInfoBuyNowb){
+			if(Main.signed){
 			Intent intent = new Intent(this, OrderCheckoutActivity.class);
 			intent.putExtra("previousActivity", "BuyItProductInfo");
 			intent.putExtra("productID", showingProductInfo.getId());
 			startActivity(intent);
+			}
+			else{
+				Toast.makeText(this, "You must be logged in to process the order", Toast.LENGTH_SHORT).show();
+			}
 		}
 		else if(v.getId()== R.id.BuyInfoAddToCartb){
 			//envia el producto para el servidor con Id del carrito producto y usuario
-			Toast.makeText(this, "This product has been added to your Cart", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "This product has been added to your Cart", Toast.LENGTH_SHORT).show();
 		}	
 	}
 

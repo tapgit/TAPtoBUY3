@@ -187,6 +187,7 @@ public class AccountSettingsActivity extends Activity implements OnClickListener
 						news[news.length-1] = newShippingAddress;
 						receivedUserdata.setShipping_addresses(news);
 						refreshSpinnersData();
+						Toast.makeText(AccountSettingsActivity.this, "Your new address has been added", Toast.LENGTH_SHORT).show();
 						Dialog.dismiss();
 					}	
 					else{
@@ -207,9 +208,10 @@ public class AccountSettingsActivity extends Activity implements OnClickListener
 				tmp.remove(selectedShippingAddress);
 				for(int i=0;i<tmp.size();i++){
 					news[i] = tmp.get(i);
-				}
+				}				
 				receivedUserdata.setShipping_addresses(news);
 				refreshSpinnersData();
+				Toast.makeText(AccountSettingsActivity.this, "Address has been removed succesfully", Toast.LENGTH_SHORT).show();
 			}
 			break;			
 

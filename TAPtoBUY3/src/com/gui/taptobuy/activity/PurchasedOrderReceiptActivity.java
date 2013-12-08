@@ -65,7 +65,7 @@ public class PurchasedOrderReceiptActivity extends Activity implements OnClickLi
 
 	@Override
 	public void onClick(View v) {
-		if (v.getId() == R.id.sellerReceipt_okB){			
+		if (v.getId() == R.id.receipt_okB){			
 			PurchasedOrderReceiptActivity.this.finish();
 		}		
 	}
