@@ -5,8 +5,8 @@
     android:background="@drawable/login_background" >
 
     <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:id="@+id/report_CloseB"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/report_list"
         android:layout_centerHorizontal="true"
