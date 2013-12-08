@@ -105,7 +105,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/checkout_CardsSpinner"  
         android:layout_marginTop="45dp"      
-        android:layout_marginLeft="115dp"
+        android:layout_marginLeft="105dp"
         android:text="Place Order" />
     
    		 </RelativeLayout>    

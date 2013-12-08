@@ -21,16 +21,11 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 	private CheckBox RegUser1;
 	private CheckBox Admin1;
 	private EditText toViewUserId;
-	private Button viewUser;
-	private Button modifyUser;
+	private Button viewUser;	
 	private Button createAcc;
 	private EditText fromDate;
 	private EditText toDate;
-	private Button loadSales;
-	private EditText salesProd;
-	private Button salesViewB;
-	private EditText totalRev;
-	private Button totalRevViewB;	
+	private Button loadSales;			
 	private LayoutInflater layoutInflater;
 	private CheckBox RegUser2;
 	private CheckBox Admin2;
@@ -62,9 +57,7 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 		Admin1.setOnClickListener(this);
 		viewUser.setOnClickListener(this);
 		createAcc.setOnClickListener(this);
-		loadSales.setOnClickListener(this);
-		salesViewB.setOnClickListener(this);
-		totalRevViewB.setOnClickListener(this);
+		loadSales.setOnClickListener(this);		
 	}
 	@Override
 	public void onClick(View v) {
