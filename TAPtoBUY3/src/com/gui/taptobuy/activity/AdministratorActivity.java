@@ -3,11 +3,14 @@ package com.gui.taptobuy.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -28,7 +31,7 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 	private Button salesViewB;
 	private EditText totalRev;
 	private Button totalRevViewB;	
-	
+	private LayoutInflater layoutInflater;
 	private CheckBox RegUser2;
 	private CheckBox Admin2;
 	
@@ -38,6 +41,8 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.account_admin);
+		
+		this.layoutInflater = LayoutInflater.from(this);
 		
 		RegUser1 = (CheckBox) findViewById(R.id.checkRegUser);
 		RegUser2 = (CheckBox) findViewById(R.id.checkRegUser2);
@@ -122,5 +127,13 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 			case R.id.adminTotalSalesB:
 				
 		}		
+	}
+	
+	public static class MyViewReport{
+
+		public TextView productRevenue;
+		public TextView soldAmount;
+		public ImageView product;
+		
 	}
 }
