@@ -1,8 +1,21 @@
 package com.gui.taptobuy.activity;
 
+import java.util.ArrayList;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,10 +23,12 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+import com.gui.taptobuy.Entities.ProductReport;
+import com.gui.taptobuy.datatask.Main;
 import com.gui.taptobuy.phase1.R;
 
 public class AdministratorActivity extends Activity implements OnClickListener {
@@ -29,6 +44,8 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 	private LayoutInflater layoutInflater;
 	private CheckBox RegUser2;
 	private CheckBox Admin2;
+	
+	private ListView reportList;
 	
 	private boolean isAdmin1 = false;
 	private boolean isAdmin2 = false;
@@ -66,18 +83,22 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 		{		
 			case R.id.checkAdmiUser:
 				RegUser1.setChecked(false);
+				isAdmin1 = true;
 				break;
 			
 			case R.id.checkRegUser:
 				Admin1.setChecked(false);
+				isAdmin1 = false;
 				break;
 				
 			case R.id.checkAdminUser2:
 				RegUser2.setChecked(false);
+				isAdmin2 = true;
 				break;
 			
 			case R.id.checkRegUser2:
 				Admin2.setChecked(false);
+				isAdmin2 = false;
 				break;
 			
 			case R.id.adminViewB:
@@ -119,6 +140,22 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 				}
 			case R.id.adminTotalSalesB:
 				
+				final Dialog dialog = new Dialog(this);
+				dialog.setContentView(R.layout.admin_report_dialog);
+				dialog.setTitle("Item's Bids");
+				reportList = (ListView) dialog.findViewById(R.id.report_list);
+			  //  new getreportTask().execute(date);
+				Button okBTN = (Button) dialog.findViewById(R.id.report_CloseB);			
+				okBTN.setOnClickListener(new View.OnClickListener() {
+
+					public void onClick(View v) 
+					{	
+						dialog.dismiss();
+					}
+				});    
+				dialog.show();	
+								
+				break;				
 		}		
 	}
 	
@@ -126,7 +163,49 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 
 		public TextView productRevenue;
 		public TextView soldAmount;
-		public ImageView product;
-		
+		public TextView product;
+		public ProductReport reportProd;		
 	}
+	
+//	private ArrayList<Bid> getBidList(String productId){
+//		HttpClient httpClient = new DefaultHttpClient();
+//		String bidListDir = Main.hostName +"/bidlist/" + productId;
+//		HttpGet get = new HttpGet(bidListDir);
+//		get.setHeader("content-type", "application/json");
+//		try
+//		{
+//			HttpResponse resp = httpClient.execute(get);
+//			if(resp.getStatusLine().getStatusCode() == 200){
+//				String jsonString = EntityUtils.toString(resp.getEntity());
+//				JSONArray bidListArray = (new JSONObject(jsonString)).getJSONArray("bidlist");
+//				bidList = new ArrayList<Bid>();
+//
+//				JSONObject bidListElement = null;
+//
+//				for(int i=0; i<bidListArray.length();i++){
+//					bidListElement = bidListArray.getJSONObject(i);
+//					bidList.add(new Bid(-1, bidListElement.getDouble("amount"), -1, bidListElement.getString("username")));
+//				}
+//
+//			}
+//			else{
+//				Log.e("JSON","bidlist json could not be downloaded.");
+//			}
+//		}
+//		catch(Exception ex)
+//		{
+//			Log.e("BidList","Error!", ex);
+//		}
+//		return bidList;
+//	}
+//
+//	private class getreportTask extends AsyncTask<String,Void,ArrayList<Bid>> {
+//		protected ArrayList<Bid> doInBackground(String... date) {
+//			return getBidList(productId[0]);//get bidlist de bids puestos a este product
+//		}
+//		protected void onPostExecute(ArrayList<Bid> bidList ) {
+//			//llenar con array de bid
+//			bidListView.setAdapter(new AdminReportListAdapter(activity,layoutInflater, bidList));
+//		}			
+//	}
 }
