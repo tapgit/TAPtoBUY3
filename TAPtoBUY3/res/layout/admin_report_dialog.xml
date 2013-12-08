@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/login_background" >
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/report_list"
+        android:layout_centerHorizontal="true"
+        android:text="Close" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="3dp"
+        android:text="Total sales within 3/12/2013 to 7/12/3013"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ListView
+        android:id="@+id/report_list"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/report_prodText" >
+    </ListView>
+
+    <Button
+        android:id="@+id/report_split"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:background="@drawable/customb2"
+        android:clickable="false" />
+
+    <TextView
+        android:id="@+id/report_prodText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"        
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/report_split"
+        android:layout_marginLeft="10dp"
+        android:text="Product"
+        android:fontFamily="comic sans"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/report_split"
+        android:layout_centerHorizontal="true"
+        android:text="Sold amount"
+        android:fontFamily="comic sans"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/report_list"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:text="Revenue"
+        android:fontFamily="comic sans"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <Button
+        android:id="@+id/report_split2"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView3"
+        android:background="@drawable/customb2"
+        android:clickable="false" />
+
+</RelativeLayout>

@@ -9,8 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"        
         android:layout_marginLeft="15dp"
         android:text="Username"
         android:fontFamily="comic sans"
@@ -21,11 +20,24 @@
          style="@style/productRatingBar"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_alignBottom="@+id/ratingBuyerUN"
          android:layout_alignParentRight="true"
-         android:layout_marginRight="59dp"
+         android:layout_alignTop="@+id/ratingBuyerUN"
+         android:layout_marginRight="64dp"
+         android:layout_marginTop="11dp"
          android:isIndicator="true"
          android:numStars="5"
          android:rating="0" />
+
+     <Button
+         android:id="@+id/bidRow_separator"
+         style="?android:attr/buttonStyleSmall"
+         android:layout_width="fill_parent"
+         android:layout_height="2dp"
+         android:layout_marginRight="2dp"
+         android:layout_marginLeft="2dp"
+         android:layout_alignParentLeft="true"
+         android:layout_below="@+id/ratingBuyerUN"
+         android:background="@drawable/customb2"
+         android:clickable="false" />
 
 </RelativeLayout>

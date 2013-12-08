@@ -3,11 +3,14 @@ package com.gui.taptobuy.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -28,18 +31,18 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 	private Button salesViewB;
 	private EditText totalRev;
 	private Button totalRevViewB;	
-	
+	private LayoutInflater layoutInflater;
 	private CheckBox RegUser2;
 	private CheckBox Admin2;
 	
 	private boolean isAdmin1 = false;
 	private boolean isAdmin2 = false;
-	
-	
-	
+		
 	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);		
 		setContentView(R.layout.account_admin);
+		
+		this.layoutInflater = LayoutInflater.from(this);
 		
 		RegUser1 = (CheckBox) findViewById(R.id.checkRegUser);
 		RegUser2 = (CheckBox) findViewById(R.id.checkRegUser2);
@@ -51,10 +54,6 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 		fromDate = (EditText) findViewById(R.id.admin_dateFrom);
 		toDate = (EditText) findViewById(R.id.admin_dateTo);
 		loadSales = (Button) findViewById(R.id.adminTotalSalesB);
-		salesProd = (EditText) findViewById(R.id.adminReportProductId);
-		salesViewB = (Button) findViewById(R.id.adminViewBReport1);
-		totalRev = (EditText) findViewById(R.id.adminReportTotalRevProdId);
-		totalRevViewB = (Button) findViewById(R.id.adminViewBReport2);
 		
 		
 		RegUser1.setOnClickListener(this);
@@ -67,8 +66,6 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 		salesViewB.setOnClickListener(this);
 		totalRevViewB.setOnClickListener(this);
 	}
-
-
 	@Override
 	public void onClick(View v) {
 		Intent intent;
@@ -94,7 +91,7 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 				//id del usuario que el admin va a modificar o ver
 				String userToView = toViewUserId.getText().toString();
 					
-				if(!RegUser2.isChecked()&&!Admin2.isChecked()){
+				if(!RegUser1.isChecked()&&!Admin1.isChecked()){
 					Toast.makeText(this, "You must specify if the user to create is Admin or Regular", Toast.LENGTH_LONG).show();
 				}	
 				else if(userToView == null){
@@ -126,7 +123,17 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 					intent.putExtra("isAdmin", isAdmin2);
 					startActivity(intent);			
 					break;
-				}				
+				}
+			case R.id.adminTotalSalesB:
+				
 		}		
+	}
+	
+	public static class MyViewReport{
+
+		public TextView productRevenue;
+		public TextView soldAmount;
+		public ImageView product;
+		
 	}
 }

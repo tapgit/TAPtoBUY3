@@ -38,7 +38,7 @@ import android.widget.Toast;
 public class CartActivity extends Activity implements OnClickListener{	
 
 	public static ListView itemsList;
-	private LayoutInflater layoutInflator;
+	private LayoutInflater layoutInflater;
 	private Button SelectAllB;
 	private Button buySelectedB;
 	private Button removeB;
@@ -57,7 +57,7 @@ public class CartActivity extends Activity implements OnClickListener{
 		checkboxList = new ArrayList<CheckBox>();
 
 
-		this.layoutInflator = LayoutInflater.from(this);
+		this.layoutInflater = LayoutInflater.from(this);
 		itemsList = (ListView)findViewById(R.id.listView1);
 
 		SelectAllB = (Button) findViewById(R.id.cartSellectAllB);
@@ -187,7 +187,7 @@ public class CartActivity extends Activity implements OnClickListener{
 			for(ProductForSale itm: cartResultItems){
 				new DownloadImageTask().execute(itm.getImgLink());
 			}
-			itemsList.setAdapter(new CartCustomListAdapter(CartActivity.this,layoutInflator, cartResultItems));
+			itemsList.setAdapter(new CartCustomListAdapter(CartActivity.this,layoutInflater, cartResultItems));
 		}			
 		private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 

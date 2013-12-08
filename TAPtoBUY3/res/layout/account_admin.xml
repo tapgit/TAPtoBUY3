@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background" >
 
     <CheckBox
         android:id="@+id/checkRegUser"
@@ -59,8 +60,8 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignLeft="@+id/adminViewB"
+        android:layout_alignRight="@+id/checkAdminUser2"
         android:layout_below="@+id/checkRegUser2"
         android:text="Create New Account" />
 
@@ -85,17 +86,6 @@
         android:text="Reports:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <EditText
-        android:id="@+id/admin_dateFrom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/adminReportText"
-        android:layout_toLeftOf="@+id/textView2"
-        android:layout_toRightOf="@+id/textView1"
-        android:ems="10"
-        android:hint="dd/mm/yyyy"
-        android:inputType="date" />
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -104,90 +94,7 @@
         android:layout_below="@+id/admin_dateFrom"
         android:layout_marginTop="14dp"
         android:text="Get report of the total sales within the selected dates"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/adminTotalSalesB"
-        android:text="Get report of the sales by this product:"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <EditText
-        android:id="@+id/adminReportProductId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignRight="@+id/adminTotalSalesB"
-        android:layout_below="@+id/textView4"
-        android:ems="10"
-        android:hint="product "
-        android:inputType="number" />
-
-    <Button
-        android:id="@+id/adminViewBReport1"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_alignRight="@+id/checkAdminUser2"
-        android:layout_alignTop="@+id/adminReportProductId"
-        android:layout_toRightOf="@+id/adminReportProductId"
-        android:text="View" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/adminReportProductId"
-        android:layout_below="@+id/adminViewBReport1"
-        android:layout_marginTop="5dp"
-        android:text="Get report of the total revenue of this product:"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <EditText
-        android:id="@+id/adminReportTotalRevProdId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView5"
-        android:layout_below="@+id/textView5"
-        android:layout_toLeftOf="@+id/adminViewBReport1"
-        android:hint="product"
-        android:ems="10"
-        android:inputType="number" />
-
-    <Button
-        android:id="@+id/adminViewBReport2"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_alignLeft="@+id/adminViewBReport1"
-        android:layout_alignRight="@+id/adminViewBReport1"
-        android:layout_alignTop="@+id/adminReportTotalRevProdId"
-        android:text="View" />
-
-    <EditText
-        android:id="@+id/admin_dateTo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_below="@+id/adminReportText"
-        android:layout_toRightOf="@+id/textView2"
-        android:ems="10"
-        android:hint="dd/mm/yyyy"
-        android:inputType="date" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/admin_dateFrom"
-        android:layout_alignBottom="@+id/admin_dateFrom"
-        android:layout_alignLeft="@+id/checkAdminUser2"
-        android:text="to: "
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/textView1"
@@ -205,9 +112,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView3"
-        android:layout_alignRight="@+id/admin_dateFrom"
         android:layout_below="@+id/textView3"
-        android:text="Load" />
+        android:layout_toLeftOf="@+id/adminCreateAccB"
+        android:text="Load"
+        android:textSize="17sp" />
 
     <Button
         android:id="@+id/button1"
@@ -216,5 +124,47 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="DONE" />
+
+    <Button
+        android:id="@+id/admin_separator"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="6dp"
+        android:layout_below="@+id/adminReportText"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/customb2"
+        android:clickable="false" />
+
+    <EditText
+        android:id="@+id/admin_dateFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/admin_separator"
+        android:layout_toLeftOf="@+id/textView2"
+        android:layout_toRightOf="@+id/textView1"
+        android:ems="10"
+        android:hint="dd/mm/yyyy"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/admin_dateTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView3"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_toRightOf="@+id/textView2"
+        android:ems="10"
+        android:hint="dd/mm/yyyy"
+        android:inputType="date" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/admin_dateTo"
+        android:layout_alignBottom="@+id/admin_dateTo"
+        android:layout_alignLeft="@+id/checkAdminUser2"
+        android:text="to: "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

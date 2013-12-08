@@ -257,13 +257,13 @@
       </RelativeLayout>
         
         </ScrollView>
-        
-        <Button
-            android:id="@+id/sell_sellItemB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"            
-            android:layout_marginLeft="125dp"     
-            android:text="Sell this Item!" />
+
+     <Button
+         android:id="@+id/sell_sellItemB"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="5dp"
+         android:layout_marginLeft="125dp"
+         android:text="Sell this Item!" />
 
 </LinearLayout>
