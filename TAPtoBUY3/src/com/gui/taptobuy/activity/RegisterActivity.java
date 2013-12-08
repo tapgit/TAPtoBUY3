@@ -188,7 +188,7 @@ public class RegisterActivity extends Activity {
 			json.put("email", emailET.getText().toString());
 			JSONObject shipObj = new JSONObject();
 			shipObj.put("country", shipCountryET.getText().toString());
-			
+			shipObj.put("contact_name", firstnameET.getText().toString() + " " + lastnameET.getText().toString()); 
 			shipObj.put("street", shipStreetET.getText().toString());
 			shipObj.put("city", shipCityET.getText().toString());
 			shipObj.put("state", shipStateET.getText().toString());
@@ -197,7 +197,7 @@ public class RegisterActivity extends Activity {
 			json.put("shipping_address",shipObj);
 			JSONObject billObj = new JSONObject();
 			billObj.put("country", billCountryET.getText().toString());
-			
+			billObj.put("contact_name", firstnameET.getText().toString() + " " + lastnameET.getText().toString()); 
 			billObj.put("street", billStreetET.getText().toString());
 			billObj.put("city", billCityET.getText().toString());
 			billObj.put("state", billStateET.getText().toString());
