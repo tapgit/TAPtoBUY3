@@ -113,7 +113,7 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 			final Dialog dialog; 
 			dialog = new Dialog(OrderCheckoutActivity.this); 
 			dialog.setContentView(R.layout.order_placed_dialog);
-			dialog.setTitle("Order placed!"); 
+			dialog.setTitle("Order placed Succesfully!"); 
 			Button ok = (Button) dialog.findViewById(R.id.orderpalceOK); 
 			ok.setOnClickListener(new View.OnClickListener() { 
 				public void onClick(View v) { 
