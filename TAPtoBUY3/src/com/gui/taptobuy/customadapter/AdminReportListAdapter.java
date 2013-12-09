@@ -75,10 +75,10 @@ public class AdminReportListAdapter extends BaseAdapter {
 		itemHolder.productRevenue = (TextView) itemRow.findViewById(R.id.report_revenue);			
 		itemRow.setTag(itemHolder);
 
-		itemHolder.productRevenue.setText(((ProductReport) repo).getProdRevenue());
-		itemHolder.product.setText(((ProductReport) repo).getProduct());
-		itemHolder.soldAmount.setText(((ProductReport) repo).getSoldAmount());
-		itemHolder.reportProd = repo; 	
+//		itemHolder.productRevenue.setText(((ProductReport) repo).getProdRevenue());
+//		itemHolder.product.setText(((ProductReport) repo).getProduct());
+//		itemHolder.soldAmount.setText(((ProductReport) repo).getSoldAmount());
+//		itemHolder.reportProd = repo; 	
 		return itemRow;
 	}	
 }
