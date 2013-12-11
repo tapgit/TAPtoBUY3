@@ -197,7 +197,7 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 	
   	private ArrayList<ProductReport> getAdminReport(String startDate, String endDate){
 		HttpClient httpClient = new DefaultHttpClient();
-		String reportDir = Main.hostName +"/report/"+startDate+"/"+endDate+"/";
+		String reportDir = Main.hostName +"/report/"+startDate+"/"+endDate;
 		System.out.println(reportDir);
 		HttpGet get = new HttpGet(reportDir);
 		get.setHeader("content-type", "application/json");
@@ -234,7 +234,7 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 		}
 		protected void onPostExecute(ArrayList<ProductReport> reports ) {
 			//llenar con array de reports
-			//reportList.setAdapter(new AdminReportListAdapter(AdministratorActivity.this,layoutInflater, reports));
+			reportList.setAdapter(new AdminReportListAdapter(AdministratorActivity.this,layoutInflater, reports));
 		}			
 	}
 }
