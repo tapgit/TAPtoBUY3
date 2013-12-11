@@ -143,7 +143,7 @@
         android:layout_toLeftOf="@+id/textView2"
         android:layout_toRightOf="@+id/textView1"
         android:ems="10"
-        android:hint="dd/mm/yyyy"
+        android:hint="yyy/mm/dd"
         android:inputType="date" />
 
     <EditText
@@ -154,7 +154,7 @@
         android:layout_alignRight="@+id/textView3"
         android:layout_toRightOf="@+id/textView2"
         android:ems="10"
-        android:hint="dd/mm/yyyy"
+        android:hint="yyyy/mm/dd"
         android:inputType="date" />
 
     <TextView

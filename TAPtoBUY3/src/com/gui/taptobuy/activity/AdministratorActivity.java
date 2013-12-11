@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gui.taptobuy.Entities.ProductReport;
+import com.gui.taptobuy.customadapter.AdminReportListAdapter;
 import com.gui.taptobuy.datatask.Main;
 import com.gui.taptobuy.phase1.R;
 
@@ -44,7 +45,7 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 	private LayoutInflater layoutInflater;
 	private CheckBox RegUser2;
 	private CheckBox Admin2;
-	
+	ArrayList<ProductReport> reports; 
 	private ListView reportList;
 	
 	private boolean isAdmin1 = false;
@@ -147,7 +148,6 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 			  //  new getreportTask().execute(date);
 				Button okBTN = (Button) dialog.findViewById(R.id.report_CloseB);			
 				okBTN.setOnClickListener(new View.OnClickListener() {
-
 					public void onClick(View v) 
 					{	
 						dialog.dismiss();
@@ -205,7 +205,7 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 //		}
 //		protected void onPostExecute(ArrayList<Bid> bidList ) {
 //			//llenar con array de bid
-//			bidListView.setAdapter(new AdminReportListAdapter(activity,layoutInflater, bidList));
+//			reportList.setAdapter(new AdminReportListAdapter(this,layoutInflater, bidList));
 //		}			
 //	}
 }
