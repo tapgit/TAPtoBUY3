@@ -2,10 +2,20 @@ package com.gui.taptobuy.activity;
 
 import java.io.File;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
 import com.gui.taptobuy.Entities.Product;
 import com.gui.taptobuy.Entities.ProductForAuctionInfo;
 import com.gui.taptobuy.Entities.ProductForSaleInfo;
 import com.gui.taptobuy.datatask.ImageManager;
+import com.gui.taptobuy.datatask.Main;
 import com.gui.taptobuy.phase1.R;
 
 import android.app.Activity;
@@ -20,6 +30,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -94,16 +105,16 @@ public class SellAnItemActivity extends Activity implements OnClickListener
 		case R.id.sell_ForBiddingCheck:
 			if(forBidCheck.isChecked()){
 
-				priceTV.setText("Starting price: ");
+				priceTV.setText("Starting price: $");
 				prodQty.setText("1");
 				prodQty.setEnabled(false);
 			}
 			else{
-				priceTV.setText("Buy Now price: ");
+				priceTV.setText("Buy Now price: $");
 				prodQty.setText("");
 				prodQty.setEnabled(true);
 			}
-				break;
+			break;
 
 			//   select a file
 		case R.id.sell_uploadPicB:
@@ -114,20 +125,15 @@ public class SellAnItemActivity extends Activity implements OnClickListener
 			break;
 
 		case R.id.sell_sellItemB:
-			if(forBidCheck.isChecked()){
-				newProd = new ProductForAuctionInfo(-1, prodTitle.getText().toString(),prodTime.getText().toString(), Double.parseDouble(shippingPrice.getText().toString()), 
-						null, null, -1,  Double.parseDouble(prodPrice.getText().toString()), Double.parseDouble(prodPrice.getText().toString()),
-						0, prodProduct.getText().toString(), prodModel.getText().toString(), prodBrand.getText().toString(), 
-						prodDimen.getText().toString(), prodDescrip.getText().toString());    				
+			if(prodTitle.getText().toString().equals("")||prodQty.getText().toString().equals("")||prodModel.getText().toString().equals("")||
+					prodProduct.getText().toString().equals("")||prodBrand.getText().toString().equals("")||prodDimen.getText().toString().equals("")||
+					prodDescrip.getText().toString().equals("")||prodPrice.getText().toString().equals("")||shippingPrice.getText().toString().equals("")||
+					prodTime.getText().toString().equals("")||picPathInput.getText().toString().equals("")){
+				Toast.makeText(SellAnItemActivity.this, "You must fill every field...", Toast.LENGTH_SHORT).show();
 			}
-			else{    	    				
-				newProd = new ProductForSaleInfo(-1, prodTitle.getText().toString(),prodTime.getText().toString(), Double.parseDouble(shippingPrice.getText().toString()), 
-						null, null, -1, Integer.parseInt(prodQty.getText().toString()), Double.parseDouble(prodPrice.getText().toString()),
-						prodProduct.getText().toString(), prodModel.getText().toString(), prodBrand.getText().toString(), prodDimen.getText().toString(), prodDescrip.getText().toString());
-
-				//add to server
+			else{
+				new sellProductTask().execute(newProd);
 			}
-			Toast.makeText(this, "Your product has been place on sale", Toast.LENGTH_SHORT).show();
 			break;
 		}	
 	}
@@ -150,10 +156,6 @@ public class SellAnItemActivity extends Activity implements OnClickListener
 				else{
 					Toast.makeText(SellAnItemActivity.this,"No image selected..", Toast.LENGTH_LONG).show();
 				}
-
-
-				Toast.makeText(SellAnItemActivity.this, picPathByGallery.toString(), Toast.LENGTH_LONG).show();
-
 			}
 		}
 	}
@@ -172,6 +174,62 @@ public class SellAnItemActivity extends Activity implements OnClickListener
 			}
 		}
 	}
+
+
+
+	private boolean sellProduct(Product newProd){
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpPost post = new HttpPost(Main.hostName+ "/sellings/" + Main.userId);
+		post.setHeader("content-type", "application/json");
+		try
+		{
+			Gson g = new Gson();
+			if(forBidCheck.isChecked()){
+				newProd = new ProductForAuctionInfo(-1, prodTitle.getText().toString(),prodTime.getText().toString(), Double.parseDouble(shippingPrice.getText().toString()), 
+						null, null, -1,  Double.parseDouble(prodPrice.getText().toString()), Double.parseDouble(prodPrice.getText().toString()),
+						0, prodProduct.getText().toString(), prodModel.getText().toString(), prodBrand.getText().toString(), 
+						prodDimen.getText().toString(), prodDescrip.getText().toString());    				
+			}
+			else{    	    				
+				newProd = new ProductForSaleInfo(-2, prodTitle.getText().toString(),prodTime.getText().toString(), Double.parseDouble(shippingPrice.getText().toString()), 
+						null, null, -1, Integer.parseInt(prodQty.getText().toString()), Double.parseDouble(prodPrice.getText().toString()),
+						prodProduct.getText().toString(), prodModel.getText().toString(), prodBrand.getText().toString(), prodDimen.getText().toString(), prodDescrip.getText().toString());
+			}
+
+			StringEntity entity = new StringEntity(g.toJson(newProd));
+			post.setEntity(entity);
+			HttpResponse resp = httpClient.execute(post);
+			if(resp.getStatusLine().getStatusCode() == 200){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		catch(Exception ex)
+		{
+			Log.e("Password check","Error!", ex);
+			return false;
+		}
+	}
+	private class sellProductTask extends AsyncTask<Product,Void,Boolean> {
+
+		protected Boolean doInBackground(Product...params) {
+			return sellProduct(params[0]);
+		}
+
+		protected void onPostExecute(Boolean ok) {
+			if (ok)
+			{
+				Toast.makeText(SellAnItemActivity.this, "Your product has been place on sale", Toast.LENGTH_SHORT).show();
+				SellAnItemActivity.this.finish();
+			}
+			else{
+				Toast.makeText(SellAnItemActivity.this, "Product could not be put on sale...", Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+
 
 	private class UploadImageTask extends AsyncTask<String, Void, Boolean> {
 		private ProgressDialog dialog = null;

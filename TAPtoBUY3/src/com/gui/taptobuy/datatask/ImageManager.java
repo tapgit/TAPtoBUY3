@@ -69,7 +69,7 @@ public class ImageManager {
 
 	public static boolean uploadImage(String imgLocalDir){
 		HttpClient client = new DefaultHttpClient();
-		String imgUploadDir = Main.hostName + "/images"; 
+		String imgUploadDir = Main.hostName + "/images/"+ Main.userId;
 		HttpPost post = new HttpPost(imgUploadDir);
 		File file = new File(imgLocalDir);
 		MultipartEntity entity = new MultipartEntity(HttpMultipartMode.STRICT);

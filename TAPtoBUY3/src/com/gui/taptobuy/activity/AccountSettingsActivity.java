@@ -61,6 +61,7 @@ public class AccountSettingsActivity extends Activity implements OnClickListener
 	private EditText lastname;
 	private EditText email;
 	private TextView shippingAdd;
+	private EditText paypalEmail;
 
 	private int selectedShippingAddress = -1;
 	private int selectedCreditCard = -1;
@@ -100,6 +101,7 @@ public class AccountSettingsActivity extends Activity implements OnClickListener
 		email = (EditText)findViewById(R.id.AccSet_email);
 		userName = (EditText)findViewById(R.id.accSet_inputUserName);
 		shippingAdd = (TextView)findViewById(R.id.accSet_ShippingAddressBox);
+		paypalEmail = (EditText) findViewById(R.id.editText1);
 
 		addCard.setOnClickListener(this);
 		removeCard.setOnClickListener(this);
@@ -202,6 +204,10 @@ public class AccountSettingsActivity extends Activity implements OnClickListener
 		case R.id.accSet_removeSAButton:
 
 			Address[] olds = receivedUserdata.getShipping_addresses();
+			if(olds.length==1){
+				Toast.makeText(AccountSettingsActivity.this, "Cannot remove this shipping address..You must have at least one.", Toast.LENGTH_SHORT).show();
+				break;
+			}
 			if(olds.length!=0){
 				Address[] news = new Address[olds.length-1];
 				ArrayList<Address> tmp = new ArrayList<Address>(Arrays.asList(olds));
@@ -267,6 +273,7 @@ public class AccountSettingsActivity extends Activity implements OnClickListener
 						news[news.length-1] = newCreditCard;
 						receivedUserdata.setCredit_cards(news);
 						refreshSpinnersData();
+						Toast.makeText(AccountSettingsActivity.this, "Your new credit card has been added", Toast.LENGTH_SHORT).show();
 						Dialog.dismiss();
 					}	
 					else{
@@ -281,6 +288,10 @@ public class AccountSettingsActivity extends Activity implements OnClickListener
 		case R.id.accSet_RemoveB:
 
 			CreditCard[] oldsC = receivedUserdata.getCredit_cards();
+			if(oldsC.length==1){
+				Toast.makeText(AccountSettingsActivity.this, "Cannot remove this credit card..You must have at least one.", Toast.LENGTH_SHORT).show();
+				break;
+			}
 			if(oldsC.length!=0){
 				CreditCard[] news = new CreditCard[oldsC.length-1];
 				ArrayList<CreditCard> tmp = new ArrayList<CreditCard>(Arrays.asList(oldsC));
@@ -298,6 +309,13 @@ public class AccountSettingsActivity extends Activity implements OnClickListener
 			break;
 
 		case R.id.accSet_SaveB:
+			//update receivedUserData
+			receivedUserdata.setFirstname(firstname.getText().toString());
+			receivedUserdata.setLastname(lastname.getText().toString());
+			receivedUserdata.setPassword(password.getText().toString());
+			receivedUserdata.setEmail(email.getText().toString());
+			receivedUserdata.setUsername(userName.getText().toString());
+			receivedUserdata.setPayEmail(paypalEmail.getText().toString());
 			new saveSettingsTask().execute(receivedUserdata);
 			AccountSettingsActivity.this.finish();
 			break;		
@@ -385,7 +403,7 @@ public class AccountSettingsActivity extends Activity implements OnClickListener
 
 				receivedUserdata = new User(userJson.getInt("id"), userJson.getString("firstname"), userJson.getString("lastname"), 
 						userJson.getString("username"), userJson.getString("password"), userJson.getString("email"), 
-						shippingAddresses, creditCards);
+						shippingAddresses, creditCards,userJson.getString("payEmail"));
 
 
 			}
@@ -417,6 +435,8 @@ public class AccountSettingsActivity extends Activity implements OnClickListener
 			password.setText(receivedUserdata.getPassword());
 			email.setText(receivedUserdata.getEmail());
 			userName.setText(receivedUserdata.getUsername());
+			paypalEmail.setText(receivedUserdata.getPayEmail());
+			
 			refreshSpinnersData();
 			dialog.dismiss();
 		}			
