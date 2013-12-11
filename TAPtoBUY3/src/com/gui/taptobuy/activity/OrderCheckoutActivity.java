@@ -256,7 +256,7 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 
 				receivedUserdata = new User(userJson.getInt("id"), userJson.getString("firstname"), userJson.getString("lastname"), 
 						userJson.getString("username"), userJson.getString("password"), userJson.getString("email"), 
-						shippingAddresses, creditCards);
+						shippingAddresses, creditCards,userJson.getString("payEmail"));
 
 
 			}

@@ -5,6 +5,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import com.gui.taptobuy.datatask.Main;
@@ -215,6 +216,11 @@ public class RegisterActivity extends Activity {
 
 			HttpResponse resp = httpClient.execute(post);
 			if(resp.getStatusLine().getStatusCode() == 201){
+				String jsonString = EntityUtils.toString(resp.getEntity());
+				JSONObject jsonUid = new JSONObject(jsonString);
+				Main.userId = jsonUid.getInt("id");
+				Main.admin = false;
+				Main.signed = true;
 				result = 0;
 			}		
 		}
@@ -234,8 +240,12 @@ public class RegisterActivity extends Activity {
 
 			if (result == 0)//user was created successfully
 			{
-				Toast.makeText(RegisterActivity.this, "You are now a member! :D", Toast.LENGTH_LONG).show();										
-				startActivity(new Intent(RegisterActivity.this,SearchActivity.class));
+				Toast.makeText(RegisterActivity.this, "You are now a member! :D", Toast.LENGTH_SHORT).show();										
+				Intent intent = new Intent(RegisterActivity.this, SearchActivity.class);
+				intent.putExtra("previousActivity", "RegisterActivity");
+				intent.putExtra("searchString", "");
+				RegisterActivity.this.startActivity(intent);	
+				RegisterActivity.this.finish();
 			}
 			else if(result == 1){
 				//username is already taken
@@ -244,7 +254,7 @@ public class RegisterActivity extends Activity {
 				//another user has that email address
 			}
 			else{
-
+				Toast.makeText(RegisterActivity.this, "Error: Account could not be created.", Toast.LENGTH_SHORT).show();
 			}
 		}
 

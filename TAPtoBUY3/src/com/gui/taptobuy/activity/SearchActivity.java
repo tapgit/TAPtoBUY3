@@ -112,6 +112,9 @@ public class SearchActivity extends Activity implements OnClickListener   {
 			if(intent.getStringExtra("previousActivity").equals("SignInActivity")){//if we came from login page search with the text entered there
 				searchString = intent.getStringExtra("searchString");
 			}
+			else if(intent.getStringExtra("previousActivity").equals("RegisterActivity")){
+				searchString = intent.getStringExtra("searchString");
+			}
 			else if(intent.getStringExtra("prev").equals("fromSpinner")){
 				searchString = intent.getStringExtra("searchString");
 			}
