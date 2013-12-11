@@ -219,8 +219,7 @@ public class MySellingListCustomAdapter extends BaseAdapter implements OnClickLi
 			else{
 				Toast.makeText(activity, "Error: Item could not be removed.", Toast.LENGTH_SHORT).show();
 			}
-		}			
-
+		}	
 	}
 	
 	private ArrayList<Bid> getBidList(String productId){

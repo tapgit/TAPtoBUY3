@@ -23,6 +23,7 @@ public class BuyItProductInfoActivity extends Activity implements OnClickListene
 	private ImageView prodPic;
 	private RatingBar sellerRating;
 	private TextView prodTitle, prodId, prodTime, prodBrand, prodDimen, prodDescrip, prodSellerUserN, prodPriceAndShip;
+	public static int BuyNowitemId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {	

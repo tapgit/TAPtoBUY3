@@ -13,15 +13,14 @@
         android:text="Close" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/report_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
-        android:layout_marginLeft="3dp"
-        android:text="Total sales within 3/12/2013 to 7/12/3013"
+        android:layout_marginLeft="3dp"       
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ListView
@@ -38,7 +37,7 @@
         android:layout_width="fill_parent"
         android:layout_height="2dp"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/report_Title"
         android:background="@drawable/customb2"
         android:clickable="false" />
 

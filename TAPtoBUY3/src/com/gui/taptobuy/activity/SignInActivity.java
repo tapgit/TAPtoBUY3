@@ -32,7 +32,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 	private Button registerB;
 	private Button bSearch;
 	private TextView signInText;
-	private ImageView signOutPic;
+	//private ImageView signOutPic;
 	private TextView registerText;
 	//public static boolean signed = false;
 	private Dialog dialog; 
@@ -52,7 +52,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 		bSearch = (Button) findViewById(R.id.bSearch);
 		signOutB = (Button) findViewById(R.id.bSign_Out);
 		signInText = (TextView)findViewById(R.id.textSign_in);
-		signOutPic = (ImageView)findViewById(R.id.signOutPic);
+		//signOutPic = (ImageView)findViewById(R.id.signOutPic);
 		registerText = (TextView)findViewById(R.id.textRegister);
 
 		bSearch.setOnClickListener(this);
@@ -72,7 +72,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 			registerB.setVisibility(View.GONE);
 			registerText.setVisibility(View.GONE);
 			signOutB.setVisibility(View.VISIBLE);
-			signOutPic.setVisibility(View.VISIBLE);		
+			//signOutPic.setVisibility(View.VISIBLE);		
 		}		
 	}
 
@@ -91,25 +91,28 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 		switch( v.getId() ) {
 
 		case R.id.bCart:
-			if(!Main.signed){
-
-				btnSignIn.setOnClickListener(new View.OnClickListener() {
-
-					public void onClick(View v) 
-					{			                
-						String username = usernameET.getText().toString();
-						String password = passwordET.getText().toString();
-						if(username.equals("") || password.equals("")){
-							Toast.makeText(SignInActivity.this, "Error, you must provide userID & password", Toast.LENGTH_SHORT).show();			
-						}	
-						new SignInTaskFromCartBtn().execute(username,password);         				                
-					}
-				});    
-				dialog.show();
+			if(!Main.admin){
+				if(!Main.signed){
+					btnSignIn.setOnClickListener(new View.OnClickListener() {
+	
+						public void onClick(View v) 
+						{			                
+							String username = usernameET.getText().toString();
+							String password = passwordET.getText().toString();
+							if(username.equals("") || password.equals("")){
+								Toast.makeText(SignInActivity.this, "Error, you must provide userID & password", Toast.LENGTH_SHORT).show();			
+							}	
+							new SignInTaskFromCartBtn().execute(username,password);         				                
+						}
+					});    
+					dialog.show();
+				}
+				else{
+					startActivity(new Intent(this, CartActivity.class));
+				}
 			}
-			else{
-				startActivity(new Intent(this, CartActivity.class));
-			}
+			else				
+				Toast.makeText(SignInActivity.this, "You have no cart Admin sorry :'(", Toast.LENGTH_SHORT).show();		
 			break;
 
 		case R.id.bCategories:			
@@ -161,7 +164,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 		registerB.setVisibility(View.GONE);
 		registerText.setVisibility(View.GONE);
 		signOutB.setVisibility(View.VISIBLE);
-		signOutPic.setVisibility(View.VISIBLE);
+		//signOutPic.setVisibility(View.VISIBLE);
 	}
 	private void signInEnabler()
 	{
@@ -171,7 +174,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 		registerB.setVisibility(View.VISIBLE);
 		registerText.setVisibility(View.VISIBLE);
 		signOutB.setVisibility(View.GONE);
-		signOutPic.setVisibility(View.GONE);
+		//signOutPic.setVisibility(View.GONE);
 	} 
 
 	private boolean signIn(String username, String password){

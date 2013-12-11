@@ -166,26 +166,31 @@ public class SearchActivity extends Activity implements OnClickListener   {
 
 		switch (v.getId())
 		{		
-		case R.id.bCart:			
-			if(!Main.signed){
-
-				btnSignIn.setOnClickListener(new View.OnClickListener() {
-
-					public void onClick(View v) 
-					{			                
-						String username = usernameET.getText().toString();
-						String password = passwordET.getText().toString();
-						if(username.equals("") || password.equals("")){
-							Toast.makeText(SearchActivity.this, "Error, you must provide userID & password", Toast.LENGTH_SHORT).show();			
-						}	
-						new SignInTaskFromCartBtn().execute(username,password);   
-					}
-				});    
-				dialog.show();				
+		case R.id.bCart:		
+			if(!Main.admin){
+				if(!Main.signed){
+	
+					btnSignIn.setOnClickListener(new View.OnClickListener() {
+	
+						public void onClick(View v) 
+						{			                
+							String username = usernameET.getText().toString();
+							String password = passwordET.getText().toString();
+							if(username.equals("") || password.equals("")){
+								Toast.makeText(SearchActivity.this, "Error, you must provide userID & password", Toast.LENGTH_SHORT).show();			
+							}	
+							new SignInTaskFromCartBtn().execute(username,password);   
+						}
+					});    
+					dialog.show();				
+				}
+				else{
+					startActivity(new Intent(this, CartActivity.class));
+				}
 			}
-			else{
-				startActivity(new Intent(this, CartActivity.class));
-			}
+			else
+				Toast.makeText(SearchActivity.this, "You have no cart Admin sorry :'(", Toast.LENGTH_SHORT).show();			
+			
 			break;
 
 
@@ -196,7 +201,11 @@ public class SearchActivity extends Activity implements OnClickListener   {
 			break;
 
 		case R.id.bMyTap:
-			startActivity(new Intent(this, MyTapActivity.class));  
+			if(Main.admin){
+				startActivity(new Intent(this, AdministratorActivity.class)); 
+			}
+			else
+				startActivity(new Intent(this, MyTapActivity.class));  
 			break;
 
 		case R.id.bSearch:

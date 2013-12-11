@@ -1,11 +1,21 @@
 package com.gui.taptobuy.activity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+
 import com.gui.taptobuy.Entities.ProductForAuction;
 import com.gui.taptobuy.Entities.ProductForAuctionInfo;
+import com.gui.taptobuy.datatask.Main;
 import com.gui.taptobuy.phase1.R;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,6 +34,8 @@ public class BidProductInfoActivity extends Activity implements OnClickListener{
 	private RatingBar sellerRating;
 	private TextView prodTitle, prodId,dollarSy,
 	prodTime, prodBrand, prodDimen, prodDescrip, prodSellerUserN, prodPrice, prodShipPrice;
+	private String bidPrice;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {	
 		super.onCreate(savedInstanceState);	
@@ -54,14 +66,12 @@ public class BidProductInfoActivity extends Activity implements OnClickListener{
 				bidInput = (EditText) findViewById(R.id.BidInfoPlaceBidInput);
 				bidInput.setVisibility(View.GONE);			
 			}
-		}
-		else{
+			else if(previousActivity.equals("Search")){
 			placeBid = (Button) findViewById(R.id.BidInfoPlaceBidb);
 			bidInput = (EditText) findViewById(R.id.BidInfoPlaceBidInput);
 			placeBid.setOnClickListener(this);
-			bidInput.setOnClickListener(this);
+			}
 		}
-		// if(previousActivity.equals("Search"))
 
 		sellerRating.setRating((float)showingProductInfo.getSellerRate());
 		prodPic.setImageBitmap(showingProductInfo.getImg());
@@ -84,16 +94,67 @@ public class BidProductInfoActivity extends Activity implements OnClickListener{
 	}
 	@Override
 	public void onClick(View v) {
-		if(v.getId() == R.id.BidInfoPlaceBidb){
-			String bidPrice = bidInput.getText().toString();
-			//chakiar si la cantidad entrada en bid input es valida
-			if(!bidPrice.equals("")){	
-				Toast.makeText(this, "Your bid "+bidInput.getText().toString()+" has been placed", Toast.LENGTH_SHORT).show();
-				//anadir producto a Mybidding y aumentar el num de bids y current bid del producto
+		if(v.getId() == R.id.BidInfoPlaceBidb){			
+			bidPrice = bidInput.getText().toString();			
+			if(!bidPrice.equals("")){
+				//new placeBidTask().execute(bidPrice);							
 			}
 			else{
 				Toast.makeText(this, "Error: you must provide a bidding quantity", Toast.LENGTH_LONG).show();
 			}
 		}	
 	}
+	
+//	private int placeBid(){
+//		int result = -1;
+//		HttpClient httpClient = new DefaultHttpClient();
+//		HttpPost post = new HttpPost(Main.hostName + "/placeBid");
+//		post.setHeader("content-type", "application/json");
+//		try
+//		{
+//			JSONObject json = new JSONObject();
+//
+//			json.put("bidAmount", this.bidPrice);	
+//			json.put("userId", Main.userId);
+//			json.put("winning", true);
+//		//	json.put("itemId", password1ET.getText().toString());
+//			
+//			StringEntity entity = new StringEntity(json.toString());
+//			post.setEntity(entity);
+//
+//			HttpResponse resp = httpClient.execute(post);
+//			if(resp.getStatusLine().getStatusCode() == 201){
+//				result = 0;
+//			}		
+//		}
+//		catch(Exception ex)
+//		{
+//			Log.e("Could not register","Error!", ex);
+//		}
+//		return result;
+//	}
+//	public class placeBidTask extends AsyncTask<String,Void,Integer> {
+//
+//		protected Integer doInBackground(String... bidPrice) {
+//	//		return placeBid(bidPrice[0]);
+//		}
+//
+//		protected void onPostExecute(Integer result) {
+//
+//			if (result == 0)//user was created successfully
+//			{
+//				Toast.makeText(BidProductInfoActivity.this, "Your bid of $"+bidPrice+" has been placed", Toast.LENGTH_SHORT).show();		
+//			}
+//			else if(result == 1){
+//				//username is already taken
+//			}
+//			else if(result == 2){
+//				//another user has that email address
+//			}
+//			else{
+//
+//			}
+//		}
+//
+//	}
 }

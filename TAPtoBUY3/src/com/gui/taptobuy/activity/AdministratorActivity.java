@@ -45,6 +45,8 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 	private LayoutInflater layoutInflater;
 	private CheckBox RegUser2;
 	private CheckBox Admin2;
+	private Button Done;
+	private TextView reportTitle;
 	ArrayList<ProductReport> reports; 
 	private ListView reportList;
 	
@@ -67,7 +69,9 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 		fromDate = (EditText) findViewById(R.id.admin_dateFrom);
 		toDate = (EditText) findViewById(R.id.admin_dateTo);
 		loadSales = (Button) findViewById(R.id.adminTotalSalesB);
-		
+		Done = (Button)findViewById(R.id.adminClose);
+		reportTitle = (TextView)findViewById(R.id.report_Title);
+
 		
 		RegUser1.setOnClickListener(this);
 		RegUser2.setOnClickListener(this);
@@ -76,6 +80,7 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 		viewUser.setOnClickListener(this);
 		createAcc.setOnClickListener(this);
 		loadSales.setOnClickListener(this);		
+		Done.setOnClickListener(this);
 	}
 	@Override
 	public void onClick(View v) {
@@ -136,26 +141,49 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 						}	
 					intent = new Intent(this,RegisterActivity.class);				
 					intent.putExtra("isAdmin", isAdmin2);
-					startActivity(intent);			
-					break;
+					startActivity(intent);							
 				}
-			case R.id.adminTotalSalesB:
 				
+				break;
+				
+			case R.id.adminTotalSalesB:					
+				String startDate = fromDate.getText().toString();
+				String endDate = toDate.getText().toString();	
+				
+				if(!startDate.equals("") && !endDate.equals("")){ // no esta bregando la condicion
+					
+				//reportTitle.setText("Total sales between " +startDate+ " to " +endDate);
+					
 				final Dialog dialog = new Dialog(this);
 				dialog.setContentView(R.layout.admin_report_dialog);
-				dialog.setTitle("Item's Bids");
+				dialog.setTitle("Products report");
+				
 				reportList = (ListView) dialog.findViewById(R.id.report_list);
-			  //  new getreportTask().execute(date);
-				Button okBTN = (Button) dialog.findViewById(R.id.report_CloseB);			
-				okBTN.setOnClickListener(new View.OnClickListener() {
-					public void onClick(View v) 
-					{	
-						dialog.dismiss();
-					}
-				});    
-				dialog.show();	
-								
-				break;				
+				try{
+					new getReportTask().execute(startDate,endDate);/////////////////////////
+				}
+				catch(Exception e){
+					Toast.makeText(this, "Error make sure the date is written in the proper format", Toast.LENGTH_LONG).show();
+				}
+				finally{
+					Button okBTN = (Button) dialog.findViewById(R.id.report_CloseB);			
+					okBTN.setOnClickListener(new View.OnClickListener() {
+						public void onClick(View v) 
+						{	
+							dialog.dismiss();
+						}
+					});    
+					dialog.show();	
+				}	
+				}
+				else
+					Toast.makeText(this, "You must specify a date interval", Toast.LENGTH_LONG).show();
+		
+				break;
+				
+			case R.id.adminClose:				
+				this.finish();
+				break;
 		}		
 	}
 	
@@ -167,45 +195,46 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 		public ProductReport reportProd;		
 	}
 	
-//	private ArrayList<Bid> getBidList(String productId){
-//		HttpClient httpClient = new DefaultHttpClient();
-//		String bidListDir = Main.hostName +"/bidlist/" + productId;
-//		HttpGet get = new HttpGet(bidListDir);
-//		get.setHeader("content-type", "application/json");
-//		try
-//		{
-//			HttpResponse resp = httpClient.execute(get);
-//			if(resp.getStatusLine().getStatusCode() == 200){
-//				String jsonString = EntityUtils.toString(resp.getEntity());
-//				JSONArray bidListArray = (new JSONObject(jsonString)).getJSONArray("bidlist");
-//				bidList = new ArrayList<Bid>();
-//
-//				JSONObject bidListElement = null;
-//
-//				for(int i=0; i<bidListArray.length();i++){
-//					bidListElement = bidListArray.getJSONObject(i);
-//					bidList.add(new Bid(-1, bidListElement.getDouble("amount"), -1, bidListElement.getString("username")));
-//				}
-//
-//			}
-//			else{
-//				Log.e("JSON","bidlist json could not be downloaded.");
-//			}
-//		}
-//		catch(Exception ex)
-//		{
-//			Log.e("BidList","Error!", ex);
-//		}
-//		return bidList;
-//	}
-//
-//	private class getreportTask extends AsyncTask<String,Void,ArrayList<Bid>> {
-//		protected ArrayList<Bid> doInBackground(String... date) {
-//			return getBidList(productId[0]);//get bidlist de bids puestos a este product
-//		}
-//		protected void onPostExecute(ArrayList<Bid> bidList ) {
-//			//llenar con array de bid
-//			reportList.setAdapter(new AdminReportListAdapter(this,layoutInflater, bidList));
-//		}			
-//	}
+  	private ArrayList<ProductReport> getAdminReport(String startDate, String endDate){
+		HttpClient httpClient = new DefaultHttpClient();
+		String reportDir = Main.hostName +"/report/"+startDate+"/"+endDate+"/";
+		System.out.println(reportDir);
+		HttpGet get = new HttpGet(reportDir);
+		get.setHeader("content-type", "application/json");
+		try
+		{
+			HttpResponse resp = httpClient.execute(get);
+			if(resp.getStatusLine().getStatusCode() == 200){
+				String jsonString = EntityUtils.toString(resp.getEntity());
+				JSONArray reportArray = (new JSONObject(jsonString)).getJSONArray("reports");
+				reports = new ArrayList<ProductReport>();
+				
+				JSONObject reportElement = null;
+
+				for(int i=0; i<reportArray.length();i++){
+					reportElement = reportArray.getJSONObject(i);
+					// 
+					reports.add(new ProductReport(reportElement.getString("product"), reportElement.getString("soldAmount"),reportElement.getString("revenue")));
+				}
+			}
+			else{
+				Log.e("JSON","report json could not be downloaded :(.");
+			}
+		}
+		catch(Exception ex)
+		{
+			Log.e("reports","Error!", ex);
+		}
+		return reports;
+	}
+
+	private class getReportTask extends AsyncTask<String,Void,ArrayList<ProductReport>> {
+		protected ArrayList<ProductReport> doInBackground(String... dates) {
+			return getAdminReport(dates[0],dates[1]);// dates
+		}
+		protected void onPostExecute(ArrayList<ProductReport> reports ) {
+			//llenar con array de reports
+			//reportList.setAdapter(new AdminReportListAdapter(AdministratorActivity.this,layoutInflater, reports));
+		}			
+	}
 }

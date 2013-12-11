@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/cartBuyItRemoveB"
         android:layout_alignLeft="@+id/cartSellerUsername"
-        android:isIndicator="false"
+        android:isIndicator="true"
         android:numStars="5"
         android:rating="3.5" />
 

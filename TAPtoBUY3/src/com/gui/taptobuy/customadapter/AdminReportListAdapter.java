@@ -66,7 +66,7 @@ public class AdminReportListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View itemRow, ViewGroup parent) {
 		MyViewReport itemHolder;
-		ProductReport repo = reportInfo.get(position);
+		ProductReport report = reportInfo.get(position);
 
 		itemRow = layoutInflater.inflate(R.layout.admin_report_row, parent, false); 
 		itemHolder = new MyViewReport();
@@ -74,11 +74,11 @@ public class AdminReportListAdapter extends BaseAdapter {
 		itemHolder.soldAmount = (TextView) itemRow.findViewById(R.id.report_soldQTY);
 		itemHolder.productRevenue = (TextView) itemRow.findViewById(R.id.report_revenue);			
 		itemRow.setTag(itemHolder);
-
-//		itemHolder.productRevenue.setText(((ProductReport) repo).getProdRevenue());
-//		itemHolder.product.setText(((ProductReport) repo).getProduct());
-//		itemHolder.soldAmount.setText(((ProductReport) repo).getSoldAmount());
-//		itemHolder.reportProd = repo; 	
+		
+		itemHolder.productRevenue.setText(((ProductReport) report).getProdRevenue()+"");
+		itemHolder.product.setText(((ProductReport) report).getProduct());
+		itemHolder.soldAmount.setText(((ProductReport) report).getSoldAmount());
+		itemHolder.reportProd = report; 	
 		return itemRow;
 	}	
 }

@@ -1,13 +1,14 @@
 package com.gui.taptobuy.Entities;
 
 public class ProductReport {
-private String product, soldAmount, prodRevenue;
+private String product, soldAmount,  prodRevenue;
 
-public ProductReport(String product, String soldAmount, String prodRevenue) {
+
+public ProductReport(String product, String soldAmount, String revenue) {
 	super();
 	this.product = product;
 	this.soldAmount = soldAmount;
-	this.prodRevenue = prodRevenue;
+	this.prodRevenue = revenue;
 }
 
 public String getProduct() {
