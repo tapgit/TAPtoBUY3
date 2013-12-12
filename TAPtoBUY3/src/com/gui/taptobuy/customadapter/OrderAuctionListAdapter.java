@@ -45,14 +45,13 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-public class OrderCustomListAdapter extends BaseAdapter implements OnClickListener {
+public class OrderAuctionListAdapter extends BaseAdapter implements OnClickListener {
 	
 	private Activity activity;
 	private LayoutInflater layoutInflater;
 	private ArrayList<Product> items;	
-	private int itemPrevQTY = 1;
 
-	public OrderCustomListAdapter (Activity a, LayoutInflater l, ArrayList<Product> items)
+	public OrderAuctionListAdapter (Activity a, LayoutInflater l, ArrayList<Product> items)
 	{
 		this.activity = a;
 		this.layoutInflater = l;
@@ -81,117 +80,32 @@ public class OrderCustomListAdapter extends BaseAdapter implements OnClickListen
 	public View getView(int position, View itemRow, ViewGroup parent) {
 		final MyViewItem itemHolder;
 		Product item = items.get(position);
-		
-//		if(item instanceof ProductForAuction)
-//		{        	
-//			itemRow = layoutInflater.inflate(R.layout.bidproduct_row, parent, false); 
-//			itemHolder = new MyViewItem();
-//			itemHolder.itemPic =  (ImageView) itemRow.findViewById(R.id.BidProductPic);
-//			itemHolder.productName = (TextView) itemRow.findViewById(R.id.BidProdName);
-//			itemHolder.sellerUserName = (TextView) itemRow.findViewById(R.id.BidSellerUserName);
-//			itemHolder.priceAndShiping = (TextView) itemRow.findViewById(R.id.BidPrice);
-//			itemHolder.bidsAmount = (TextView) itemRow.findViewById(R.id.bids);
-//			itemHolder.timeRemaining = (TextView) itemRow.findViewById(R.id.BidRemaningTime);                      
-//			itemHolder.sellerRating = (RatingBar)itemRow.findViewById(R.id.BidSellerRating);
-//			itemHolder.itemsQTY = (EditText) itemRow.findViewById(R.id.ordCheckRow_QtyInput);
-//
-//			itemHolder.sellerRating.setTag(itemHolder);
-//			itemHolder.itemPic.setTag(itemHolder);
-//			itemRow.setTag(itemHolder);
-//
-//			itemHolder.bidsAmount.setText(((ProductForAuction) item).getTotalBids()+" bids");
-//			double shippingPrice = item.getShippingPrice();
-//			if(shippingPrice == 0){
-//				itemHolder.priceAndShiping.setText("$" + ((ProductForAuction) item).getCurrentBidPrice()+" (Free Shipping)");
-//			}
-//			else{
-//				itemHolder.priceAndShiping.setText("$" + ((ProductForAuction) item).getCurrentBidPrice()+" (Shipping: $" + shippingPrice + ")"); 
-//			}
-//		}
-//		else //for sale
-//		{	        
-			itemRow = layoutInflater.inflate(R.layout.ordercheckout_productrow, parent, false); 
+		      	
+			itemRow = layoutInflater.inflate(R.layout.order_auctioncheckout_row, parent, false); 
 			itemHolder = new MyViewItem();
-			itemHolder.itemPic =  (ImageView) itemRow.findViewById(R.id.ordCheckRow_ProductPic);
-			itemHolder.productName = (TextView) itemRow.findViewById(R.id.ordCheckRow_ProdName);
-			itemHolder.sellerUserName = (TextView) itemRow.findViewById(R.id.ordCheckRow_SellerID);
-			itemHolder.priceAndShiping = (TextView) itemRow.findViewById(R.id.ordCheckRow_Price);        
-			itemHolder.timeRemaining = (TextView) itemRow.findViewById(R.id.ordCheckRow_RemaningTime);			       
-			itemHolder.sellerRating = (RatingBar)itemRow.findViewById(R.id.ordCheckRow_SellerRating);            
-			itemHolder.itemsQTY = (EditText)itemRow.findViewById(R.id.ordCheckRow_QtyInput);
-			
+			itemHolder.itemPic =  (ImageView) itemRow.findViewById(R.id.ordAuCheckRow_ProductPic);
+			itemHolder.productName = (TextView) itemRow.findViewById(R.id.ordAuCheckRow_ProdName);
+			itemHolder.sellerUserName = (TextView) itemRow.findViewById(R.id.ordAuCheckRow_SellerUN);
+			itemHolder.priceAndShiping = (TextView) itemRow.findViewById(R.id.ordAuCheckRow_Price);					                     
+			itemHolder.sellerRating = (RatingBar)itemRow.findViewById(R.id.ordAuCheckRow_SellerRating);			
+
 			itemHolder.sellerRating.setTag(itemHolder);
 			itemHolder.itemPic.setTag(itemHolder);
-			itemHolder.itemsQTY.setTag(itemHolder);
-			itemRow.setTag(itemHolder);  
+			itemRow.setTag(itemHolder);
 
 			double shippingPrice = item.getShippingPrice();
 			if(shippingPrice == 0){
-				itemHolder.priceAndShiping.setText("$" + ((ProductForSale) item).getInstantPrice() +" (Free Shipping)");
+				itemHolder.priceAndShiping.setText("$" + ((ProductForAuction) item).getCurrentBidPrice()+" (Free Shipping)");
 			}
 			else{
-				itemHolder.priceAndShiping.setText("$" + ((ProductForSale) item).getInstantPrice() +" (Shipping: $" + shippingPrice + ")"); 
-			}        
-//		}
-		 
-		itemRow.setOnClickListener(this); 
+				itemHolder.priceAndShiping.setText("$" + ((ProductForAuction) item).getCurrentBidPrice()+" (Shipping: $" + shippingPrice + ")"); 
+			}		
 		
-		itemHolder.itemsQTY.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				if(!itemHolder.itemsQTY.getText().toString().equals("")){
-				 itemPrevQTY = Integer.parseInt(itemHolder.itemsQTY.getText().toString());	
-				System.out.println("previous qty: "+itemPrevQTY);/////////
-				}
-				else
-				 itemPrevQTY = 0;
-			}			
-		});
-		itemHolder.itemsQTY.setOnKeyListener(new OnKeyListener() {                 
-	        @Override
-	        public boolean onKey(View v, int keyCode, KeyEvent event) {	        	
-	        	if(keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)
-	        	{  	   
-	        		int quantity;
-	        		String orderPricetxt = OrderCheckoutActivity.totalPrice.getText().toString();
-	        		String shipping = orderPricetxt.substring(orderPricetxt.indexOf(' '), orderPricetxt.length());
-	        		orderPricetxt = orderPricetxt.substring(1,orderPricetxt.indexOf(' '));	
-	        		// le remueve el shipping y el signo de $ para tener el actual price	        		
-					String itemPricetxt = (itemHolder.priceAndShiping).getText().toString();
-					itemPricetxt = itemPricetxt.substring(1,itemPricetxt.indexOf(' '));	
-					
-					if(!itemHolder.itemsQTY.getText().toString().equals("")){
-					quantity = Integer.parseInt(itemHolder.itemsQTY.getText().toString());	
-					}
-					else{
-						quantity = 0;
-						itemHolder.itemsQTY.setText("0");
-					}
-					double itemPrice = Double.parseDouble(itemPricetxt);
-					double orderPrice = Double.parseDouble(orderPricetxt);
-					double addPrice = (quantity*itemPrice) - (itemPrice*itemPrevQTY);
-					
-					System.out.println("Precio = "+itemPrice+"*"+quantity+" - "+itemPrice+"*"+itemPrevQTY+" = "+addPrice);	///////				
-					System.out.println("Precio total: "+(orderPrice+addPrice));/////////
-					// cerrar keyboard automaticamente
-					InputMethodManager imm = (InputMethodManager)activity.getSystemService(
-							Context.INPUT_METHOD_SERVICE);
-							imm.hideSoftInputFromWindow(itemHolder.itemsQTY.getWindowToken(), 0);
-					//	
-					double finalPrice = orderPrice+addPrice;
-					DecimalFormat df = new DecimalFormat("#.##");
-					OrderCheckoutActivity.totalPrice.setText("$"+df.format(finalPrice)+shipping);
-	        	}
-	        	return false;       
-	        }
-	    });	
-				
+		itemRow.setOnClickListener(this); 					
 		itemHolder.item = item;
 		itemHolder.productName.setText(item.getTitle());   		
 		itemHolder.sellerUserName.setText(item.getSellerUsername());		
 		itemHolder.sellerRating.setRating((float)item.getSellerRate());
-		itemHolder.timeRemaining.setText(item.getTimeRemaining());	
-
 		itemHolder.itemPic.setImageBitmap(item.getImg());
 
 		return itemRow;
@@ -199,8 +113,7 @@ public class OrderCustomListAdapter extends BaseAdapter implements OnClickListen
 
 	@Override
 	public void onClick(View v) {
-		MyViewItem itemHolder = (MyViewItem) v.getTag(); 
-		//int itemQuantity = Integer.parseInt(itemHolder.itemsQTY.getText().toString()); //gets the quantity to buy of the item at the row
+		MyViewItem itemHolder = (MyViewItem) v.getTag(); 		
 		new productInfoTask().execute(itemHolder.item.getId() + "");
 	}
 	

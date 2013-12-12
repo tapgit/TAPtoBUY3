@@ -47,7 +47,7 @@ import com.gui.taptobuy.datatask.ImageManager;
 import com.gui.taptobuy.datatask.Main;
 import com.gui.taptobuy.phase1.R;
 
-public class OrderCheckoutActivity extends Activity implements OnClickListener{
+public class OrderAuctionCheckoutActivity extends Activity implements OnClickListener{
 
 	private Button placeOrder;
 	private Spinner cardsSpinner;
@@ -71,16 +71,17 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 
 		Intent intent = getIntent();
 		String previousAtivity = intent.getStringExtra("previousActivity");
-
-		if(previousAtivity.equals("Cart")){
-			productsIDList = intent.getIntegerArrayListExtra("productsID");//recoger arraylist de id's de los productos que vamos a comprar
-		}
-		else if(previousAtivity.equals("BuyItProductInfo")){
+		
+		if(previousAtivity.equals("Search")){
 			productsIDList = new ArrayList<Integer>();
-			productsIDList.add(intent.getIntExtra("productID", 0)); /// cudiado con el 0 - default value
-		}		
+			productsIDList.add(intent.getIntExtra("productID", 0)); 
+		}
+		else if(previousAtivity.equals("SignIn")){
+			productsIDList = new ArrayList<Integer>();
+			productsIDList.add(intent.getIntExtra("productID", 0)); 
+		}
 		if(!productsIDList.isEmpty()) 
-			new buyNowProductsTask().execute(productsIDList);
+			new AuctionProductsTask().execute(productsIDList);
 		else
 			Toast.makeText(this, "No items to buy on the list", Toast.LENGTH_SHORT).show();
 
@@ -109,16 +110,15 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 			public void onNothingSelected(AdapterView<?> arg0) {}	        	
 		});
 		
-		
-
 		new getMyAccountSettingsTask().execute();
 	}
 
 	@Override
 	public void onClick(View v) {
-		if(v.getId() == R.id.checkout_PlaceOrderB){			
+		if(v.getId() == R.id.checkout_PlaceOrderB){	
+			//pasar la order al db y luego >
 			final Dialog dialog; 
-			dialog = new Dialog(OrderCheckoutActivity.this); 
+			dialog = new Dialog(OrderAuctionCheckoutActivity.this); 
 			dialog.setContentView(R.layout.order_placed_dialog);
 			dialog.setTitle("Order placed Succesfully!"); 
 			Button ok = (Button) dialog.findViewById(R.id.orderpalceOK); 
@@ -135,10 +135,10 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 	}
 
 
-	private ArrayList<Product> buyNowProducts(ArrayList<Integer> productsIDList){
+	private ArrayList<Product> AuctionOrderProducts(ArrayList<Integer> productsIDList){
 		HttpClient httpClient = new DefaultHttpClient();
 
-		HttpPost post = new HttpPost(Main.hostName + "/buynow/" + Main.userId);
+		HttpPost post = new HttpPost(Main.hostName + "/buynow/" + Main.userId); ///////// puede ser el mismo??
 		post.setHeader("content-type", "application/json");		
 		try
 		{
@@ -191,18 +191,18 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 		return items;
 	}
 
-	private class buyNowProductsTask extends AsyncTask<ArrayList<Integer>,Void,ArrayList<Product>> {
+	private class AuctionProductsTask extends AsyncTask<ArrayList<Integer>,Void,ArrayList<Product>> {
 		public  int downloadadImagesIndex = 0;
 		protected ArrayList<Product> doInBackground(ArrayList<Integer>... productsIDList) {
-			return buyNowProducts(productsIDList[0]);
+			return AuctionOrderProducts(productsIDList[0]);
 		}
-		protected void onPostExecute(ArrayList<Product> buyNowProducts ) {
+		protected void onPostExecute(ArrayList<Product> auctionProducts ) {
 			totalPrice.setText(totalPriceValue);
 			//download images
-			for(Product itm: buyNowProducts){
+			for(Product itm: auctionProducts){
 				new DownloadImageTask().execute(itm.getImgLink());
 			}
-			itemsList.setAdapter(new OrderCustomListAdapter(OrderCheckoutActivity.this, OrderCheckoutActivity.this.layoutInflator, buyNowProducts));
+			itemsList.setAdapter(new OrderCustomListAdapter(OrderAuctionCheckoutActivity.this, OrderAuctionCheckoutActivity.this.layoutInflator, auctionProducts));
 		}			
 		private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
@@ -303,10 +303,10 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 				creditCardsIdentifiers[i] = "xxxx-xxxx-xxxx-" + tmpCrdCard.getNumber().substring(12);
 			}
 
-			ArrayAdapter<String> shippingAddressesAdapter = new ArrayAdapter<String>(OrderCheckoutActivity.this,android.R.layout.simple_list_item_single_choice, shippingAddressesIdentifiers);
+			ArrayAdapter<String> shippingAddressesAdapter = new ArrayAdapter<String>(OrderAuctionCheckoutActivity.this,android.R.layout.simple_list_item_single_choice, shippingAddressesIdentifiers);
 			shipAddrSpinner.setAdapter(shippingAddressesAdapter);
 
-			ArrayAdapter<String> creditCardsAdapter = new ArrayAdapter<String>(OrderCheckoutActivity.this,android.R.layout.simple_list_item_single_choice, creditCardsIdentifiers);
+			ArrayAdapter<String> creditCardsAdapter = new ArrayAdapter<String>(OrderAuctionCheckoutActivity.this,android.R.layout.simple_list_item_single_choice, creditCardsIdentifiers);
 			cardsSpinner.setAdapter(creditCardsAdapter);
 
 		}			

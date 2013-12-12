@@ -46,9 +46,13 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 	private CheckBox RegUser2;
 	private CheckBox Admin2;
 	private Button Done;
-	private TextView reportTitle;
 	ArrayList<ProductReport> reports; 
 	private ListView reportList;
+	private TextView totalAmt;
+	private TextView totalRev;
+	private int totalAmount=0;
+	private double totalRevenue=0;
+	private Dialog dialog;
 	
 	private boolean isAdmin1 = false;
 	private boolean isAdmin2 = false;
@@ -69,9 +73,7 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 		fromDate = (EditText) findViewById(R.id.admin_dateFrom);
 		toDate = (EditText) findViewById(R.id.admin_dateTo);
 		loadSales = (Button) findViewById(R.id.adminTotalSalesB);
-		Done = (Button)findViewById(R.id.adminClose);
-		reportTitle = (TextView)findViewById(R.id.report_Title);
-
+		Done = (Button)findViewById(R.id.adminClose);	
 		
 		RegUser1.setOnClickListener(this);
 		RegUser2.setOnClickListener(this);
@@ -151,30 +153,30 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 				String endDate = toDate.getText().toString();	
 				
 				if(!startDate.equals("") && !endDate.equals("")){ // no esta bregando la condicion
-					
-				//reportTitle.setText("Total sales between " +startDate+ " to " +endDate);
-					
-				final Dialog dialog = new Dialog(this);
-				dialog.setContentView(R.layout.admin_report_dialog);
-				dialog.setTitle("Products report");
-				
-				reportList = (ListView) dialog.findViewById(R.id.report_list);
-				try{
-					new getReportTask().execute(startDate,endDate);/////////////////////////
-				}
-				catch(Exception e){
-					Toast.makeText(this, "Error make sure the date is written in the proper format", Toast.LENGTH_LONG).show();
-				}
-				finally{
-					Button okBTN = (Button) dialog.findViewById(R.id.report_CloseB);			
-					okBTN.setOnClickListener(new View.OnClickListener() {
-						public void onClick(View v) 
-						{	
-							dialog.dismiss();
-						}
-					});    
-					dialog.show();	
-				}	
+								
+					dialog = new Dialog(this);
+					dialog.setContentView(R.layout.admin_report_dialog);
+					dialog.setTitle("Products report");
+
+					reportList = (ListView) dialog.findViewById(R.id.report_list);
+					try{
+						new getReportTask().execute(startDate,endDate);/////////////////////////
+					}
+					catch(Exception e){
+						Toast.makeText(this, "Error make sure the date is written in the proper format", Toast.LENGTH_LONG).show();
+					}
+					finally{		
+						
+						Button okBTN = (Button) dialog.findViewById(R.id.report_CloseB);			
+						okBTN.setOnClickListener(new View.OnClickListener() {
+							public void onClick(View v) 
+							{	
+								dialog.dismiss();
+							}
+						}); 
+						
+						dialog.show();	
+					}	
 				}
 				else
 					Toast.makeText(this, "You must specify a date interval", Toast.LENGTH_LONG).show();
@@ -215,6 +217,8 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 					reportElement = reportArray.getJSONObject(i);
 					// 
 					reports.add(new ProductReport(reportElement.getString("product"), reportElement.getString("soldAmount"),reportElement.getString("revenue")));
+					totalAmount += Integer.parseInt((reportElement.getString("soldAmount")));					
+					totalRevenue += Double.parseDouble((reportElement.getString("revenue")).replace("$ ", ""));					
 				}
 			}
 			else{
@@ -235,6 +239,11 @@ public class AdministratorActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(ArrayList<ProductReport> reports ) {
 			//llenar con array de reports
 			reportList.setAdapter(new AdminReportListAdapter(AdministratorActivity.this,layoutInflater, reports));
+			totalAmt = (TextView)dialog.findViewById(R.id.report_TotalAmt);
+			totalRev = (TextView)dialog.findViewById(R.id.report_TotalRev);
+			totalAmt.setText("" + totalAmount);
+			totalRev.setText("$ "+totalRevenue);
+			
 		}			
 	}
 }

@@ -8,20 +8,9 @@
         android:id="@+id/report_CloseB"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/report_list"
+        android:layout_below="@+id/report_split3"
         android:layout_centerHorizontal="true"
-        android:text="Close" />
-
-    <TextView
-        android:id="@+id/report_Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="3dp"       
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="Close" />   
 
     <ListView
         android:id="@+id/report_list"
@@ -49,6 +38,7 @@
         android:layout_below="@+id/report_split"
         android:layout_marginLeft="10dp"
         android:text="Product"
+        android:textStyle="bold"
         android:fontFamily="comic sans"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -59,6 +49,7 @@
         android:layout_below="@+id/report_split"
         android:layout_centerHorizontal="true"
         android:text="Sold amount"
+        android:textStyle="bold"
         android:fontFamily="comic sans"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -70,6 +61,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:text="Revenue"
+        android:textStyle="bold"
         android:fontFamily="comic sans"
         android:textAppearance="?android:attr/textAppearanceMedium" />
     
@@ -82,5 +74,46 @@
         android:layout_below="@+id/textView3"
         android:background="@drawable/customb2"
         android:clickable="false" />
+
+    <TextView
+        android:id="@+id/report_Totaltxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/report_prodText"        
+        android:layout_below="@+id/report_list"
+        android:text="Total:"
+         android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <Button
+        android:id="@+id/report_split3"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/report_Totaltxt"
+        android:background="@drawable/customb2"
+        android:clickable="false" />
+
+    <TextView
+        android:id="@+id/report_TotalRev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/report_list"        
+        android:layout_toRightOf="@+id/textView2"
+        android:ems="10"
+        android:text="Total Rev"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/report_TotalAmt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/report_list"
+        android:layout_centerHorizontal="true"
+        android:text="total amt"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
