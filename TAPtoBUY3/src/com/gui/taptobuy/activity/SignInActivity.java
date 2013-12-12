@@ -37,12 +37,13 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 	//public static boolean signed = false;
 	private Dialog dialog; 
 	private EditText searchTextET;
+	public boolean userHasWon = false;
 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.signin_home);
+		setContentView(R.layout.signin_home);		
 
 		searchTextET = (EditText) findViewById(R.id.searchAtLogin);
 		cartB = (Button) findViewById(R.id.bCart);
@@ -131,7 +132,6 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 			{	
 				public void onClick(View v) 
 				{	
-
 					String username = usernameET.getText().toString();
 					String password = passwordET.getText().toString();
 					if(username.equals("") || password.equals("")){
@@ -236,7 +236,28 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 				if(Main.admin){
 					SignInActivity.this.startActivity(new Intent(SignInActivity.this, AdministratorActivity.class));
 				}
-				else{
+//				else{
+//					new hasWonItemTask().execute(Main.userId);
+//				}
+			 
+				if(userHasWon)
+				{	
+					final Dialog dialog; 
+					dialog = new Dialog(SignInActivity.this); 
+					dialog.setContentView(R.layout.itemwon_dialog);
+					dialog.setTitle("Item Won!"); 
+					Button ok = (Button) dialog.findViewById(R.id.itemWonOK); 
+					ok.setOnClickListener(new View.OnClickListener() { 
+						public void onClick(View v) { 
+							Intent wonCheckout = new Intent(SignInActivity.this,OrderCheckoutActivity.class); 
+							//wonCheckout.putExtra(name, value)
+							//startActivity(wonCheckout); 
+							dialog.dismiss(); 
+						}
+					});
+					dialog.show(); 					
+				}
+				else{ //no notification
 					Intent intent = new Intent(SignInActivity.this, SearchActivity.class);
 					intent.putExtra("previousActivity", "SignInActivity");
 					intent.putExtra("searchString", searchTextET.getText().toString());
@@ -266,6 +287,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 				if(Main.admin){
 					SignInActivity.this.startActivity(new Intent(SignInActivity.this, AdministratorActivity.class));
 				}
+				
 				else{
 					Intent intent = new Intent(SignInActivity.this, CartActivity.class);
 					//intent.putExtra("previousActivity", "SignInActivity");
@@ -278,4 +300,19 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 			}
 		}
 	}
+	
+//	private class hasWonItemTask extends AsyncTask<Integer,Boolean,Boolean>{
+//
+//		@Override
+//		protected Boolean doInBackground(Integer... userId) {
+//			
+//			return hasWonItem(userId[0]) ;
+//		}
+//
+//		private Boolean hasWonItem(Integer integer) {
+//			// TODO Auto-generated method stub
+//			return null;
+//		}
+//		
+//	}
 }

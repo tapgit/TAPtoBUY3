@@ -103,6 +103,7 @@ public class SearchActivity extends Activity implements OnClickListener   {
 
 		
 		Intent intent = getIntent();
+		
 		if(intent.getStringExtra("previousActivity").equals("CategoryActivity")){//if we came from CatActivity search by catId
 			catId = intent.getIntExtra("catId", -1);	
 			searchString = "";
@@ -118,6 +119,7 @@ public class SearchActivity extends Activity implements OnClickListener   {
 			else if(intent.getStringExtra("prev").equals("fromSpinner")){
 				searchString = intent.getStringExtra("searchString");
 			}
+			
 			else{
 				searchString = searchET.getText().toString();//search for the user entered text on this activity
 			}
@@ -195,7 +197,6 @@ public class SearchActivity extends Activity implements OnClickListener   {
 				Toast.makeText(SearchActivity.this, "You have no cart Admin sorry :'(", Toast.LENGTH_SHORT).show();			
 			
 			break;
-
 
 
 		case R.id.bCategories:

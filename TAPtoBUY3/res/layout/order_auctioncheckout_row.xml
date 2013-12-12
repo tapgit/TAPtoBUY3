@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+
+    <ImageView
+        android:id="@+id/ordAuCheckRow_ProductPic"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="4dip"
+        android:layout_marginTop="4dip"
+        android:src="@drawable/android" />
+
+    <TextView
+        android:id="@+id/ordAuCheckRow_ProdName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ordAuCheckRow_ProductPic"
+        android:layout_toRightOf="@+id/ordAuCheckRow_ProductPic"
+        android:text="Product Name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <RatingBar
+        android:id="@+id/ordAuCheckRow_SellerRating"
+        style="@style/productRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ordAuCheckRow_SellerUN"
+        android:layout_below="@+id/ordAuCheckRow_SellerUN"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:rating="4.5" />
+
+    <TextView
+        android:id="@+id/ordAuCheckRow_Price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ordAuCheckRow_ProdName"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/ordAuCheckRow_ProdName"
+        android:text="Price + Shipp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/ordAuCheckRow_SellerUN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ordAuCheckRow_Price"
+        android:layout_below="@+id/ordAuCheckRow_Price"
+        android:text="sellerUsername"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>
