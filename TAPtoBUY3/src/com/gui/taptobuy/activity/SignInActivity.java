@@ -1,6 +1,8 @@
 package com.gui.taptobuy.activity;
 
 
+import java.util.ArrayList;
+
 import com.gui.taptobuy.datatask.Main;
 import com.gui.taptobuy.phase1.R;
 import org.apache.http.HttpResponse;
@@ -9,6 +11,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -38,6 +41,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 	private Dialog dialog; 
 	private EditText searchTextET;
 	public boolean userHasWon = false;
+	public static ArrayList<Integer> wonBidsIds;
 
 
 	@Override
@@ -63,6 +67,8 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 		registerB.setOnClickListener(this);
 		signOutB.setOnClickListener(this);	
 		Intent intent = getIntent();
+
+		wonBidsIds = new ArrayList<Integer>();
 		
 		if(intent.hasExtra("OrderCheckOut")){
 			this.onRestart();
@@ -100,7 +106,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 			if(!Main.admin){
 				if(!Main.signed){
 					btnSignIn.setOnClickListener(new View.OnClickListener() {
-	
+
 						public void onClick(View v) 
 						{			                
 							String username = usernameET.getText().toString();
@@ -206,6 +212,14 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 				}
 				else{
 					Main.admin = false;
+					//Get won bids
+					JSONArray array = json.getJSONArray("wonBids");
+					JSONObject js = null;
+					wonBidsIds = new ArrayList<Integer>();
+					for(int i=0;i<array.length();i++){
+						js = array.getJSONObject(i);
+						wonBidsIds.add(js.getInt("iid"));
+					}
 				}
 				Main.userId = json.getInt("id");
 				correct = true;
@@ -236,12 +250,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 				if(Main.admin){
 					SignInActivity.this.startActivity(new Intent(SignInActivity.this, AdministratorActivity.class));
 				}
-//				else{
-//					new hasWonItemTask().execute(Main.userId);
-//				}
-			 
-				if(userHasWon)
-				{	
+				else if(!wonBidsIds.isEmpty()) {	//won?
 					final Dialog dialog; 
 					dialog = new Dialog(SignInActivity.this); 
 					dialog.setContentView(R.layout.itemwon_dialog);
@@ -249,9 +258,10 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 					Button ok = (Button) dialog.findViewById(R.id.itemWonOK); 
 					ok.setOnClickListener(new View.OnClickListener() { 
 						public void onClick(View v) { 
-							Intent wonCheckout = new Intent(SignInActivity.this,OrderCheckoutActivity.class); 
-							//wonCheckout.putExtra(name, value)
-							//startActivity(wonCheckout); 
+							Intent wonCheckout = new Intent(SignInActivity.this,OrderAuctionCheckoutActivity.class); 
+							wonCheckout.putExtra("previousActivity", "SignInActivity");
+							wonCheckout.putIntegerArrayListExtra("productsID", wonBidsIds);
+							startActivity(wonCheckout); 
 							dialog.dismiss(); 
 						}
 					});
@@ -283,11 +293,11 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 				Toast.makeText(SignInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 				signInDisabler();
 				dialog.dismiss(); 
-				
+
 				if(Main.admin){
 					SignInActivity.this.startActivity(new Intent(SignInActivity.this, AdministratorActivity.class));
 				}
-				
+
 				else{
 					Intent intent = new Intent(SignInActivity.this, CartActivity.class);
 					//intent.putExtra("previousActivity", "SignInActivity");
@@ -300,19 +310,19 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 			}
 		}
 	}
-	
-//	private class hasWonItemTask extends AsyncTask<Integer,Boolean,Boolean>{
-//
-//		@Override
-//		protected Boolean doInBackground(Integer... userId) {
-//			
-//			return hasWonItem(userId[0]) ;
-//		}
-//
-//		private Boolean hasWonItem(Integer integer) {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//		
-//	}
+
+	//	private class hasWonItemTask extends AsyncTask<Integer,Boolean,Boolean>{
+	//
+	//		@Override
+	//		protected Boolean doInBackground(Integer... userId) {
+	//			
+	//			return hasWonItem(userId[0]) ;
+	//		}
+	//
+	//		private Boolean hasWonItem(Integer integer) {
+	//			// TODO Auto-generated method stub
+	//			return null;
+	//		}
+	//		
+	//	}
 }

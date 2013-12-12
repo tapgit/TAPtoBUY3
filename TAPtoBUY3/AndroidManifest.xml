@@ -215,6 +215,17 @@
             </intent-filter>
         </activity>
         
+          <activity
+            android:name="com.gui.taptobuy.activity.OrderAuctionCheckoutActivity"
+            android:label="@string/orderCheckoutLabel"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.gui.taptobuy.phase1.ORDERAUCTIONCHECKOUTACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        
       
     </application>
 </manifest>

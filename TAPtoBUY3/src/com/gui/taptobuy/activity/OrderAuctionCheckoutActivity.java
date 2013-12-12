@@ -41,6 +41,7 @@ import com.gui.taptobuy.Entities.ProductForAuction;
 import com.gui.taptobuy.Entities.ProductForSale;
 import com.gui.taptobuy.Entities.User;
 
+import com.gui.taptobuy.customadapter.OrderAuctionListAdapter;
 import com.gui.taptobuy.customadapter.OrderCustomListAdapter;
 
 import com.gui.taptobuy.datatask.ImageManager;
@@ -62,6 +63,8 @@ public class OrderAuctionCheckoutActivity extends Activity implements OnClickLis
 	private String totalPriceValue;
 	private int orderID;
 	
+	private CreditCard selectedCreditCard;
+	private Address selectedAddress;
 
 	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);		
@@ -72,13 +75,11 @@ public class OrderAuctionCheckoutActivity extends Activity implements OnClickLis
 		Intent intent = getIntent();
 		String previousAtivity = intent.getStringExtra("previousActivity");
 		
-		if(previousAtivity.equals("Search")){
-			productsIDList = new ArrayList<Integer>();
-			productsIDList.add(intent.getIntExtra("productID", 0)); 
+		if(previousAtivity.equals("SearchActivity")){
+			productsIDList = intent.getIntegerArrayListExtra("productsID");
 		}
-		else if(previousAtivity.equals("SignIn")){
-			productsIDList = new ArrayList<Integer>();
-			productsIDList.add(intent.getIntExtra("productID", 0)); 
+		else if(previousAtivity.equals("SignInActivity")){
+			productsIDList = intent.getIntegerArrayListExtra("productsID");
 		}
 		if(!productsIDList.isEmpty()) 
 			new AuctionProductsTask().execute(productsIDList);
@@ -96,12 +97,22 @@ public class OrderAuctionCheckoutActivity extends Activity implements OnClickLis
 		cardsSpinner = (Spinner) findViewById (R.id.checkout_CardsSpinner);
 		shipAddrSpinner = (Spinner) findViewById(R.id.checkout_SpinnerAdd);			
 
+		cardsSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				selectedCreditCard = receivedUserdata.getCredit_cards()[arg0.getSelectedItemPosition()];
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {}
+
+		});
+		
 		shipAddrSpinner.setOnItemSelectedListener(new OnItemSelectedListener(){	
 			@Override
 			public void onItemSelected(AdapterView<?> arg0,View arg1,int arg2, long arg3) 
 			{
 				int index = arg0.getSelectedItemPosition();
-				Address selectedAddress = receivedUserdata.getShipping_addresses()[index];
+				selectedAddress = receivedUserdata.getShipping_addresses()[index];
 				shippingAdd.setText(selectedAddress.getContact_name() + "\n" + selectedAddress.getStreet() +  "\n" + selectedAddress.getCity() + 
 						" " + selectedAddress.getState() + " " + selectedAddress.getZip_code() + "\n" + selectedAddress.getCountry() + "\n" + 
 						selectedAddress.getTelephone());
@@ -110,31 +121,86 @@ public class OrderAuctionCheckoutActivity extends Activity implements OnClickLis
 			public void onNothingSelected(AdapterView<?> arg0) {}	        	
 		});
 		
+		///dialog
+		
 		new getMyAccountSettingsTask().execute();
 	}
 
 	@Override
 	public void onClick(View v) {
 		if(v.getId() == R.id.checkout_PlaceOrderB){	
-			//pasar la order al db y luego >
-			final Dialog dialog; 
-			dialog = new Dialog(OrderAuctionCheckoutActivity.this); 
-			dialog.setContentView(R.layout.order_placed_dialog);
-			dialog.setTitle("Order placed Succesfully!"); 
-			Button ok = (Button) dialog.findViewById(R.id.orderpalceOK); 
-			ok.setOnClickListener(new View.OnClickListener() { 
-				public void onClick(View v) { 
-					//Intent search = new Intent(OrderCheckoutActivity.this,SearchActivity.class); 
-					//search.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
-					//startActivity(search); 
-					dialog.dismiss(); 
-				}
-			});
-			dialog.show(); 
+//			//pasar la order al db y luego >
+//			final Dialog dialog; 
+//			dialog = new Dialog(OrderAuctionCheckoutActivity.this); 
+//			dialog.setContentView(R.layout.order_placed_dialog);
+//			dialog.setTitle("Order placed Succesfully!"); 
+//			Button ok = (Button) dialog.findViewById(R.id.orderpalceOK); 
+//			ok.setOnClickListener(new View.OnClickListener() { 
+//				public void onClick(View v) { 
+//					//Intent search = new Intent(OrderCheckoutActivity.this,SearchActivity.class); 
+//					//search.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+//					//startActivity(search); 
+//					dialog.dismiss(); 
+//				}
+//			});
+//			dialog.show(); 
+			new placeAuctionOrderTask().execute(items);
 		}	
 	}
 
 
+	private boolean placeAuctionOrder(ArrayList<Product> items){
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpPost post = new HttpPost(Main.hostName + "/placeAuctionOrder/" + Main.userId);
+		post.setHeader("content-type", "application/json");		
+		try
+		{
+			JSONObject respJson = new JSONObject();
+			JSONArray array = new JSONArray();
+			for(Product i: items){
+				JSONObject jsonObj = new JSONObject();
+				jsonObj.put("productId", i.getId());
+				jsonObj.put("price", ((ProductForSale)i).getInstantPrice());
+				jsonObj.put("shippingPrice", ((ProductForSale)i).getShippingPrice());
+				array.put(jsonObj);
+			}
+			respJson.put("productIdsToBuy", array);
+			respJson.put("creditCardNum", selectedCreditCard.getNumber());
+			respJson.put("shippingAddressId", selectedAddress.getId());
+			StringEntity entity = new StringEntity(respJson.toString());
+			post.setEntity(entity);
+			HttpResponse resp = httpClient.execute(post);
+			Log.i("JSON",respJson.toString());
+			if(resp.getStatusLine().getStatusCode() == 200){
+				return true;
+			}
+			else{
+				Log.e("JSON","products to buy json could not be downloaded.");
+				return false;
+			}
+		}
+		catch(Exception ex)
+		{
+			Log.e("Could place buyNow order","Error!", ex);
+			return false;
+		}
+	}
+
+	private class placeAuctionOrderTask extends AsyncTask<ArrayList<Product>,Void,Boolean> {
+		protected Boolean doInBackground(ArrayList<Product>... params) {
+			return placeAuctionOrder(params[0]);
+		}	
+		protected void onPostExecute(Boolean result) {
+			if(result){
+				Toast.makeText(OrderAuctionCheckoutActivity.this, "Order has been placed.", Toast.LENGTH_SHORT).show();
+			}
+			else{
+				Toast.makeText(OrderAuctionCheckoutActivity.this, "Order could not be placed", Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+
+	
 	private ArrayList<Product> AuctionOrderProducts(ArrayList<Integer> productsIDList){
 		HttpClient httpClient = new DefaultHttpClient();
 
@@ -202,7 +268,7 @@ public class OrderAuctionCheckoutActivity extends Activity implements OnClickLis
 			for(Product itm: auctionProducts){
 				new DownloadImageTask().execute(itm.getImgLink());
 			}
-			itemsList.setAdapter(new OrderCustomListAdapter(OrderAuctionCheckoutActivity.this, OrderAuctionCheckoutActivity.this.layoutInflator, auctionProducts));
+			itemsList.setAdapter(new OrderAuctionListAdapter(OrderAuctionCheckoutActivity.this, OrderAuctionCheckoutActivity.this.layoutInflator, auctionProducts));
 		}			
 		private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 

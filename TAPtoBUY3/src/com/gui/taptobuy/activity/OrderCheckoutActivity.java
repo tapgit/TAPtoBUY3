@@ -189,7 +189,7 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 				dialog.show(); 
 			}
 			else{
-				Toast.makeText(OrderCheckoutActivity.this, "Cart is empty...", Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderCheckoutActivity.this, "Error: Order could not be placed..", Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
