@@ -53,7 +53,7 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 	private Spinner shipAddrSpinner;
 	private TextView shippingAdd;
 	private ListView itemsList;
-	private TextView totalPrice;
+	public static TextView totalPrice;
 	private User receivedUserdata;
 	public static ArrayList<Product>  items;
 	private ArrayList<Integer> productsIDList;
