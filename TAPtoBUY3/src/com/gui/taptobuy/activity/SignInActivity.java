@@ -61,6 +61,11 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 		signInB.setOnClickListener(this);
 		registerB.setOnClickListener(this);
 		signOutB.setOnClickListener(this);	
+		Intent intent = getIntent();
+		
+		if(intent.hasExtra("OrderCheckOut")){
+			this.onRestart();
+		}
 	}
 
 	@Override

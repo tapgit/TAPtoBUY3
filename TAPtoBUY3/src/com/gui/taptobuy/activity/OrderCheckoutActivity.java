@@ -60,7 +60,7 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 	private LayoutInflater layoutInflator;
 	private String totalPriceValue;
 	private int orderID;
-	private Dialog dialog; 
+	public Dialog dialog; 
 	private CreditCard selectedCreditCard;
 	private Address selectedAddress;
 
@@ -123,10 +123,11 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 		Button ok = (Button) dialog.findViewById(R.id.orderpalceOK); 
 		ok.setOnClickListener(new View.OnClickListener() { 
 			public void onClick(View v) { 
-				//Intent search = new Intent(OrderCheckoutActivity.this,SearchActivity.class); 
-				//search.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
-				//startActivity(search); 
 				dialog.dismiss(); 
+				Intent intent = new Intent(OrderCheckoutActivity.this,SignInActivity.class); 
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+				intent.putExtra("OrderCheckOut", true);
+				OrderCheckoutActivity.this.startActivity(intent); 
 			}
 		});
 
@@ -183,7 +184,7 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 		protected Boolean doInBackground(ArrayList<Product>... params) {
 			return placeBuyNowOrder(params[0]);
 		}	
-		protected void onPostExecute(boolean result) {
+		protected void onPostExecute(Boolean result) {
 			if(result){
 				dialog.show(); 
 			}
