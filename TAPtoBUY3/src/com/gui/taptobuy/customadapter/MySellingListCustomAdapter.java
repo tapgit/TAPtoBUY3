@@ -180,11 +180,9 @@ public class MySellingListCustomAdapter extends BaseAdapter implements OnClickLi
 			break;
 		case R.id.mySell_QuitB:
 			new quitFromSaleTask().execute(itemHolder.item.getId() + "");
-			activity.mySellingsRefresh();//refresh
 			break;
 		case R.id.mySell_QuitfromSellingB:
 			new quitFromSaleTask().execute(itemHolder.item.getId() + "");
-			activity.mySellingsRefresh(); //refresh
 			break;
 		}
 		
@@ -215,6 +213,7 @@ public class MySellingListCustomAdapter extends BaseAdapter implements OnClickLi
 		protected void onPostExecute(Boolean result) {
 			if(result){
 				Toast.makeText(activity, "Item removed.", Toast.LENGTH_SHORT).show();
+				activity.mySellingsRefresh(); //refresh
 			}
 			else{
 				Toast.makeText(activity, "Error: Item could not be removed.", Toast.LENGTH_SHORT).show();

@@ -325,7 +325,7 @@ public class AccountSettingsActivity extends Activity implements OnClickListener
 	private boolean saveSettings(User user){
 		HttpClient httpClient = new DefaultHttpClient();
 
-		HttpPut put = new HttpPut(Main.hostName + "/user/" + Main.userId);
+		HttpPut put = new HttpPut(Main.hostName + "/user/" + userId);
 		put.setHeader("content-type", "application/json");		
 		try
 		{
