@@ -82,34 +82,34 @@ public class OrderCustomListAdapter extends BaseAdapter implements OnClickListen
 		final MyViewItem itemHolder;
 		Product item = items.get(position);
 		
-//		if(item instanceof ProductForAuction)
-//		{        	
-//			itemRow = layoutInflater.inflate(R.layout.bidproduct_row, parent, false); 
-//			itemHolder = new MyViewItem();
-//			itemHolder.itemPic =  (ImageView) itemRow.findViewById(R.id.BidProductPic);
-//			itemHolder.productName = (TextView) itemRow.findViewById(R.id.BidProdName);
-//			itemHolder.sellerUserName = (TextView) itemRow.findViewById(R.id.BidSellerUserName);
-//			itemHolder.priceAndShiping = (TextView) itemRow.findViewById(R.id.BidPrice);
-//			itemHolder.bidsAmount = (TextView) itemRow.findViewById(R.id.bids);
-//			itemHolder.timeRemaining = (TextView) itemRow.findViewById(R.id.BidRemaningTime);                      
-//			itemHolder.sellerRating = (RatingBar)itemRow.findViewById(R.id.BidSellerRating);
-//			itemHolder.itemsQTY = (EditText) itemRow.findViewById(R.id.ordCheckRow_QtyInput);
-//
-//			itemHolder.sellerRating.setTag(itemHolder);
-//			itemHolder.itemPic.setTag(itemHolder);
-//			itemRow.setTag(itemHolder);
-//
-//			itemHolder.bidsAmount.setText(((ProductForAuction) item).getTotalBids()+" bids");
-//			double shippingPrice = item.getShippingPrice();
-//			if(shippingPrice == 0){
-//				itemHolder.priceAndShiping.setText("$" + ((ProductForAuction) item).getCurrentBidPrice()+" (Free Shipping)");
-//			}
-//			else{
-//				itemHolder.priceAndShiping.setText("$" + ((ProductForAuction) item).getCurrentBidPrice()+" (Shipping: $" + shippingPrice + ")"); 
-//			}
-//		}
-//		else //for sale
-//		{	        
+		if(item instanceof ProductForAuction)
+		{        	
+			itemRow = layoutInflater.inflate(R.layout.bidproduct_row, parent, false); 
+			itemHolder = new MyViewItem();
+			itemHolder.itemPic =  (ImageView) itemRow.findViewById(R.id.BidProductPic);
+			itemHolder.productName = (TextView) itemRow.findViewById(R.id.BidProdName);
+			itemHolder.sellerUserName = (TextView) itemRow.findViewById(R.id.BidSellerUserName);
+			itemHolder.priceAndShiping = (TextView) itemRow.findViewById(R.id.BidPrice);
+			itemHolder.bidsAmount = (TextView) itemRow.findViewById(R.id.bids);
+			itemHolder.timeRemaining = (TextView) itemRow.findViewById(R.id.BidRemaningTime);                      
+			itemHolder.sellerRating = (RatingBar)itemRow.findViewById(R.id.BidSellerRating);
+			itemHolder.itemsQTY = (EditText) itemRow.findViewById(R.id.ordCheckRow_QtyInput);
+
+			itemHolder.sellerRating.setTag(itemHolder);
+			itemHolder.itemPic.setTag(itemHolder);
+			itemRow.setTag(itemHolder);
+
+			itemHolder.bidsAmount.setText(((ProductForAuction) item).getTotalBids()+" bids");
+			double shippingPrice = item.getShippingPrice();
+			if(shippingPrice == 0){
+				itemHolder.priceAndShiping.setText("$" + ((ProductForAuction) item).getCurrentBidPrice()+" (Free Shipping)");
+			}
+			else{
+				itemHolder.priceAndShiping.setText("$" + ((ProductForAuction) item).getCurrentBidPrice()+" (Shipping: $" + shippingPrice + ")"); 
+			}
+		}
+		else //for sale
+		{	        
 			itemRow = layoutInflater.inflate(R.layout.ordercheckout_productrow, parent, false); 
 			itemHolder = new MyViewItem();
 			itemHolder.itemPic =  (ImageView) itemRow.findViewById(R.id.ordCheckRow_ProductPic);
@@ -132,7 +132,7 @@ public class OrderCustomListAdapter extends BaseAdapter implements OnClickListen
 			else{
 				itemHolder.priceAndShiping.setText("$" + ((ProductForSale) item).getInstantPrice() +" (Shipping: $" + shippingPrice + ")"); 
 			}        
-//		}
+		}
 		 
 		itemRow.setOnClickListener(this); 
 		

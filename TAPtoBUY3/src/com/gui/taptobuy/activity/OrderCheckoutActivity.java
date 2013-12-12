@@ -107,30 +107,34 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {}	        	
-		});
-		
-		
+		});		
 
 		new getMyAccountSettingsTask().execute();
 	}
 
 	@Override
 	public void onClick(View v) {
-		if(v.getId() == R.id.checkout_PlaceOrderB){			
-			final Dialog dialog; 
-			dialog = new Dialog(OrderCheckoutActivity.this); 
-			dialog.setContentView(R.layout.order_placed_dialog);
-			dialog.setTitle("Order placed Succesfully!"); 
-			Button ok = (Button) dialog.findViewById(R.id.orderpalceOK); 
-			ok.setOnClickListener(new View.OnClickListener() { 
-				public void onClick(View v) { 
-					//Intent search = new Intent(OrderCheckoutActivity.this,SearchActivity.class); 
-					//search.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
-					//startActivity(search); 
-					dialog.dismiss(); 
-				}
-			});
-			dialog.show(); 
+		if(v.getId() == R.id.checkout_PlaceOrderB){		
+			
+			Intent search = new Intent(OrderCheckoutActivity.this,SearchActivity.class); 
+			//search.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+			OrderCheckoutActivity.this.startActivity(search); 
+//			final Dialog dialog; 
+//			dialog = new Dialog(OrderCheckoutActivity.this); 
+//			dialog.setContentView(R.layout.order_placed_dialog);
+//			dialog.setTitle("Order placed Succesfully!"); 
+//			Button ok = (Button) dialog.findViewById(R.id.orderpalceOK); 
+//			ok.setOnClickListener(new View.OnClickListener() { 
+//				public void onClick(View v) { 
+//					dialog.dismiss(); 
+//					OrderCheckoutActivity.this.finish();
+//					Intent search = new Intent(OrderCheckoutActivity.this,SearchActivity.class); 
+//					search.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+//					OrderCheckoutActivity.this.startActivity(search); 
+//					
+//				}
+//			});
+//			dialog.show(); 
 		}	
 	}
 
