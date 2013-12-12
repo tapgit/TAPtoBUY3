@@ -60,6 +60,9 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 	private LayoutInflater layoutInflator;
 	private String totalPriceValue;
 	private int orderID;
+	private Dialog dialog; 
+	private CreditCard selectedCreditCard;
+	private Address selectedAddress;
 
 	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);		
@@ -90,12 +93,22 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 		cardsSpinner = (Spinner) findViewById (R.id.checkout_CardsSpinner);
 		shipAddrSpinner = (Spinner) findViewById(R.id.checkout_SpinnerAdd);			
 
+		cardsSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				selectedCreditCard = receivedUserdata.getCredit_cards()[arg0.getSelectedItemPosition()];
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {}
+
+		});
+		
 		shipAddrSpinner.setOnItemSelectedListener(new OnItemSelectedListener(){	
 			@Override
 			public void onItemSelected(AdapterView<?> arg0,View arg1,int arg2, long arg3) 
 			{
 				int index = arg0.getSelectedItemPosition();
-				Address selectedAddress = receivedUserdata.getShipping_addresses()[index];
+				selectedAddress = receivedUserdata.getShipping_addresses()[index];
 				shippingAdd.setText(selectedAddress.getContact_name() + "\n" + selectedAddress.getStreet() +  "\n" + selectedAddress.getCity() + 
 						" " + selectedAddress.getState() + " " + selectedAddress.getZip_code() + "\n" + selectedAddress.getCountry() + "\n" + 
 						selectedAddress.getTelephone());
@@ -103,28 +116,81 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {}	        	
 		});
+		
+		dialog = new Dialog(OrderCheckoutActivity.this); 
+		dialog.setContentView(R.layout.order_placed_dialog);
+		dialog.setTitle("Order placed Succesfully!"); 
+		Button ok = (Button) dialog.findViewById(R.id.orderpalceOK); 
+		ok.setOnClickListener(new View.OnClickListener() { 
+			public void onClick(View v) { 
+				//Intent search = new Intent(OrderCheckoutActivity.this,SearchActivity.class); 
+				//search.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+				//startActivity(search); 
+				dialog.dismiss(); 
+			}
+		});
 
 		new getMyAccountSettingsTask().execute();
 	}
 
 	@Override
 	public void onClick(View v) {
-		if(v.getId() == R.id.checkout_PlaceOrderB){			
-			final Dialog dialog; 
-			dialog = new Dialog(OrderCheckoutActivity.this); 
-			dialog.setContentView(R.layout.order_placed_dialog);
-			dialog.setTitle("Order placed Succesfully!"); 
-			Button ok = (Button) dialog.findViewById(R.id.orderpalceOK); 
-			ok.setOnClickListener(new View.OnClickListener() { 
-				public void onClick(View v) { 
-					//Intent search = new Intent(OrderCheckoutActivity.this,SearchActivity.class); 
-					//search.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
-					//startActivity(search); 
-					dialog.dismiss(); 
-				}
-			});
-			dialog.show(); 
+		if(v.getId() == R.id.checkout_PlaceOrderB){
+			new placeBuyNowOrderTask().execute(items);
 		}	
+	}
+	
+	
+	private boolean placeBuyNowOrder(ArrayList<Product> items){
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpPost post = new HttpPost(Main.hostName + "/placeBuyNowOrder/" + Main.userId);
+		post.setHeader("content-type", "application/json");		
+		try
+		{
+			JSONObject respJson = new JSONObject();
+			JSONArray array = new JSONArray();
+			for(Product i: items){
+				JSONObject jsonObj = new JSONObject();
+				jsonObj.put("productId", i.getId());
+				jsonObj.put("quantity", 1);//////////////////////////////////////////
+				jsonObj.put("price", ((ProductForSale)i).getInstantPrice());
+				jsonObj.put("shippingPrice", ((ProductForSale)i).getShippingPrice());
+				array.put(jsonObj);
+			}
+			respJson.put("productIdsToBuy", array);
+			respJson.put("creditCardNum", selectedCreditCard.getNumber());
+			respJson.put("shippingAddressId", selectedAddress.getId());
+			StringEntity entity = new StringEntity(respJson.toString());
+			post.setEntity(entity);
+			HttpResponse resp = httpClient.execute(post);
+			Log.i("JSON",respJson.toString());
+			if(resp.getStatusLine().getStatusCode() == 200){
+				return true;
+			}
+			else{
+				Log.e("JSON","products to buy json could not be downloaded.");
+				return false;
+			}
+		}
+		catch(Exception ex)
+		{
+			Log.e("Could place buyNow order","Error!", ex);
+			return false;
+		}
+	}
+
+	private class placeBuyNowOrderTask extends AsyncTask<ArrayList<Product>,Void,Boolean> {
+		protected Boolean doInBackground(ArrayList<Product>... params) {
+			return placeBuyNowOrder(params[0]);
+		}	
+		protected void onPostExecute(boolean result) {
+			if(result){
+				dialog.show(); 
+			}
+			else{
+				Toast.makeText(OrderCheckoutActivity.this, "Cart is empty...", Toast.LENGTH_SHORT).show();
+			}
+		}
 	}
 
 
@@ -208,12 +274,6 @@ public class OrderCheckoutActivity extends Activity implements OnClickListener{
 			}
 		}
 	}
-
-
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 	private User getMyAccountSettings(){
 		HttpClient httpClient = new DefaultHttpClient();

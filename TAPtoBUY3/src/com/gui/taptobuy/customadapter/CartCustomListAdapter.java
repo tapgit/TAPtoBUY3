@@ -33,6 +33,7 @@ import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
@@ -178,14 +179,8 @@ public class CartCustomListAdapter extends BaseAdapter implements OnClickListene
 
 		if(v.getId() ==  R.id.cartBuyItRemoveB){
 			int idToRemove = itemHolder.item.getId();
-			for(ProductForSale p: items){
-				if(p.getId()==idToRemove){
-					items.remove(p);
-					break;
-				}
-			}
+			new quitFromCartTask().execute(idToRemove+"");
 			itemHolder.check.setChecked(false);// para que lo saque del array
-			CartActivity.itemsList.invalidateViews(); //refresh
 		}
 		else if(v.getId() == R.id.cartBuyNowB){
 			Intent intent = new Intent(activity,OrderCheckoutActivity.class);
@@ -199,8 +194,45 @@ public class CartCustomListAdapter extends BaseAdapter implements OnClickListene
 			activity.startActivity(intent);
 		}
 		else			
-			new productInfoTask().execute(itemHolder.item.getId() + ""); 		
+			new productInfoTask().execute(itemHolder.item.getId() + ""); 	
+		
+		
 	}
+	private boolean quitFromCart(String productID){
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpDelete delete = new HttpDelete(Main.hostName + "/cart/" + Main.userId + "/" + productID);
+		try
+		{
+			HttpResponse resp = httpClient.execute(delete);
+			if(resp.getStatusLine().getStatusCode() == 204){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		catch(Exception ex)
+		{
+			Log.e("Could not remove this item!","Error!", ex);
+			return false;
+		}
+	}
+	private class quitFromCartTask extends AsyncTask<String,Void,Boolean> {
+		protected Boolean doInBackground(String... productId) {
+			return quitFromCart(productId[0]);
+		}
+		protected void onPostExecute(Boolean result) {
+			if(result){
+				activity.myCartRefresh(); //refresh
+			}
+			else{
+				Toast.makeText(activity, "Error: Item could not be removed.", Toast.LENGTH_SHORT).show();
+			}
+		}	
+	}
+	
+	
+	
 
 	private Product getProductInfo(String productId)
 	{

@@ -169,8 +169,10 @@ public class BiddingsCustomListAdapter extends BaseAdapter implements OnClickLis
 			protected void onPostExecute(Bitmap result) 
 			{
 				downloadedProductInfo.setImg(result);				
-				BidProductInfoActivity.showingProductInfo = (ProductForAuctionInfo) downloadedProductInfo;					
-				activity.startActivity(new Intent(activity, BidProductInfoActivity.class));		
+				BidProductInfoActivity.showingProductInfo = (ProductForAuctionInfo) downloadedProductInfo;		
+				Intent intent = new Intent(activity, BidProductInfoActivity.class);
+				intent.putExtra("previousActivity", "MyBiddings");				
+				activity.startActivity(intent);			
 			}
 		}
 	}

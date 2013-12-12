@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
@@ -119,24 +120,49 @@ public class CartActivity extends Activity implements OnClickListener{
 			}
 			else{
 				for(Integer i: checkoutListIDs){
-					for(ProductForSale p: cartResultItems){
-						if(p.getId()==i.intValue()){
-							cartResultItems.remove(p);
-							break;
-						}
-					}
+					new quitFromCartTask().execute(i+""); 
 				}
 				for(CheckBox check: checkboxList){
 					if(check.isChecked()){
 						check.setChecked(false);					
 					}
 				}
-				itemsList.invalidateViews();//refresh
 			}
 			break;
 		}
 	}
-
+	private boolean quitFromCart(String productID){
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpDelete delete = new HttpDelete(Main.hostName + "/cart/" + Main.userId + "/" + productID);
+		try
+		{
+			HttpResponse resp = httpClient.execute(delete);
+			if(resp.getStatusLine().getStatusCode() == 204){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		catch(Exception ex)
+		{
+			Log.e("Could not remove this item!","Error!", ex);
+			return false;
+		}
+	}
+	private class quitFromCartTask extends AsyncTask<String,Void,Boolean> {
+		protected Boolean doInBackground(String... productId) {
+			return quitFromCart(productId[0]);
+		}
+		protected void onPostExecute(Boolean result) {
+			if(result){
+				CartActivity.this.myCartRefresh(); //refresh
+			}
+		}	
+	}
+	public void myCartRefresh(){
+		new cartProductsTask().execute();
+	}
 	private ArrayList<ProductForSale> getCartItems(){
 		HttpClient httpClient = new DefaultHttpClient();
 		String cartDir = Main.hostName +"/cart/" + Main.userId;

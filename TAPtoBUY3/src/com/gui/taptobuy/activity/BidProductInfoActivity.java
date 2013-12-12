@@ -6,6 +6,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
+import com.gui.taptobuy.Entities.Bid;
 import com.gui.taptobuy.Entities.ProductForAuction;
 import com.gui.taptobuy.Entities.ProductForAuctionInfo;
 import com.gui.taptobuy.datatask.Main;
@@ -66,7 +67,7 @@ public class BidProductInfoActivity extends Activity implements OnClickListener{
 				bidInput = (EditText) findViewById(R.id.BidInfoPlaceBidInput);
 				bidInput.setVisibility(View.GONE);			
 			}
-			else if(previousActivity.equals("Search")){
+			else if(previousActivity.equals("Search") || previousActivity.equals("MyBiddings")){
 			placeBid = (Button) findViewById(R.id.BidInfoPlaceBidb);
 			bidInput = (EditText) findViewById(R.id.BidInfoPlaceBidInput);
 			placeBid.setOnClickListener(this);
@@ -97,7 +98,7 @@ public class BidProductInfoActivity extends Activity implements OnClickListener{
 		if(v.getId() == R.id.BidInfoPlaceBidb){			
 			bidPrice = bidInput.getText().toString();			
 			if(!bidPrice.equals("")){
-				//new placeBidTask().execute(bidPrice);							
+				new placeBidTask().execute(bidPrice);							
 			}
 			else{
 				Toast.makeText(this, "Error: you must provide a bidding quantity", Toast.LENGTH_LONG).show();
@@ -105,56 +106,42 @@ public class BidProductInfoActivity extends Activity implements OnClickListener{
 		}	
 	}
 	
-//	private int placeBid(){
-//		int result = -1;
-//		HttpClient httpClient = new DefaultHttpClient();
-//		HttpPost post = new HttpPost(Main.hostName + "/placeBid");
-//		post.setHeader("content-type", "application/json");
-//		try
-//		{
-//			JSONObject json = new JSONObject();
-//
-//			json.put("bidAmount", this.bidPrice);	
-//			json.put("userId", Main.userId);
-//			json.put("winning", true);
-//		//	json.put("itemId", password1ET.getText().toString());
-//			
-//			StringEntity entity = new StringEntity(json.toString());
-//			post.setEntity(entity);
-//
-//			HttpResponse resp = httpClient.execute(post);
-//			if(resp.getStatusLine().getStatusCode() == 201){
-//				result = 0;
-//			}		
-//		}
-//		catch(Exception ex)
-//		{
-//			Log.e("Could not register","Error!", ex);
-//		}
-//		return result;
-//	}
-//	public class placeBidTask extends AsyncTask<String,Void,Integer> {
-//
-//		protected Integer doInBackground(String... bidPrice) {
-//	//		return placeBid(bidPrice[0]);
-//		}
-//
-//		protected void onPostExecute(Integer result) {
-//
-//			if (result == 0)//user was created successfully
-//			{
-//				Toast.makeText(BidProductInfoActivity.this, "Your bid of $"+bidPrice+" has been placed", Toast.LENGTH_SHORT).show();		
-//			}
-//			else if(result == 1){
-//				//username is already taken
-//			}
-//			else if(result == 2){
-//				//another user has that email address
-//			}
-//			else{
-//
-//			}
-//		}
-//
-//	}
+	private int placeBid(String bidPrice){
+		int result = -1;
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpPost post = new HttpPost(Main.hostName + "/placebid/" + Main.userId+"/"+showingProductInfo.getId()+"/"+bidPrice);
+		try
+		{
+			HttpResponse resp = httpClient.execute(post);
+			result = resp.getStatusLine().getStatusCode();
+		}
+		catch(Exception ex)
+		{
+			Log.e("Place Bid Exception","Error!", ex);
+		}
+		return result;
+	}
+	public class placeBidTask extends AsyncTask<String,Void,Integer> {
+
+		protected Integer doInBackground(String... bidPrice) {
+			return placeBid(bidPrice[0]);
+		}
+
+		protected void onPostExecute(Integer result) {
+			if(result == 200){//ok
+				Toast.makeText(BidProductInfoActivity.this, "Your bid of $"+bidPrice+" has been placed", Toast.LENGTH_SHORT).show();
+				BidProductInfoActivity.this.finish();
+			}	
+			else if(result == 400){//badrequest(InvalidAmount)
+				Toast.makeText(BidProductInfoActivity.this, "Invalid amount...", Toast.LENGTH_SHORT).show();
+			}
+			else if(result == 404){//notFound(Auction Ended)
+				Toast.makeText(BidProductInfoActivity.this, "This auction has already ended...", Toast.LENGTH_SHORT).show();
+			}
+			else{
+				Toast.makeText(BidProductInfoActivity.this, "Error: Cannot place bid on this item", Toast.LENGTH_SHORT).show();
+			}
+		}
+
+	}
 }
